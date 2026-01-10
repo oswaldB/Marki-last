@@ -1,8 +1,16 @@
-@st-002
-Feature: Page Hello World
-  Scenario: Affichage de la page Hello World
-    Given Je suis sur la page hello "/hello"
-    Then Je vois le titre "Hello World"
-    And Je vois le sous-titre "Bienvenue sur Marki"
-    And Je vois le texte "Ceci est une page de démonstration"
-    And Je vois un bouton "Retour à l'accueil"
+# language: fr
+Fonctionnalité: Page de salutation personnalisée
+  En tant qu'utilisateur,
+  Je veux une page qui me salue avec mon prénom,
+  Afin de me sentir accueilli.
+
+  Contexte:
+    Étant donné que je suis sur la page "/hello"
+
+  Scénario: Salutation sans prénom
+    Quand je visite la page "/hello"
+    Alors je dois voir le message "Bonjour !"
+
+  Scénario: Salutation avec prénom
+    Quand je visite la page "/hello/toto"
+    Alors je dois voir le message "Bonjour toto !"
