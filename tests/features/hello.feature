@@ -14,3 +14,11 @@ Fonctionnalité: Page de salutation personnalisée
   Scénario: Salutation avec prénom
     Quand je visite la page "/hello/toto"
     Alors je dois voir le message "Bonjour toto !"
+
+  Scénario: Changer de prénom
+    Quand je visite la page "/hello/toto"
+    Et je clique sur "Pas le bon prénom ?"
+    Alors je dois voir un formulaire pour changer le prénom
+    Quand je saisis "titi" dans le formulaire
+    Et je clique sur "Changer"
+    Alors je dois voir le message "Bonjour titi !"
