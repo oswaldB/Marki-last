@@ -94,17 +94,7 @@ CREATE TABLE commissions (
 
 ## 6. Scripts Backend
 
-### 6.1. Récupération des Pièces Non Réglées
-- **Script** : `app/scripts/fetch_unpaid_pieces.py`
-- **Description** : Récupère les pièces non réglées depuis une base PostgreSQL externe et les importe dans la base SQLite locale.
-- **Spécifications** : [Voir le script](../scripts/commissions/fetch_unpaid_pieces.spec)
-- **Exemple d'appel** :
-  ```bash
-  python app/scripts/fetch_unpaid_pieces.py \
-      --log "reports/ST-<NUM>-fetch_unpaid_pieces.log"
-  ```
-
-### 6.2. Traitement des Commissions
+### 6.1. Traitement des Commissions
 - **Script** : `app/scripts/process_commissions.py`
 - **Description** : Traite les commissions des techniciens à partir des factures et des missions associées, en vérifiant la cohérence des données et en gérant les cas particuliers (factures mono-technicien, articles en pack, etc.).
 - **Spécifications** : [Voir le script](../scripts/commissions/process_commissions.spec)
