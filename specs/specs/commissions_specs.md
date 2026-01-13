@@ -101,22 +101,22 @@ Stocke les informations sur les commissions générées pour les techniciens.
 ## 6. Scripts Backend
 
 ### 6.1. Traitement des Commissions
-- **Script** : `app/scripts/process_commissions.py`
+- **Script** : `app/scripts/commissions/process_commissions.py`
 - **Description** : Traite les commissions des techniciens à partir des factures et des missions associées, en vérifiant la cohérence des données et en gérant les cas particuliers (factures mono-technicien, articles en pack, etc.).
-- **Spécifications** : [Voir le script](../scripts/commissions/process_commissions.spec)
+- **Spécifications** : [Voir le script](../../_app/scripts/commissions/process_commissions.spec.md)
 - **Exemple d'appel** :
   ```bash
-  python app/scripts/process_commissions.py \
+  python app/scripts/commissions/process_commissions.py \
       --log "reports/ST-<NUM>-process_commissions.log"
   ```
 
 ### 6.2. Récupération des Factures Impayées
-- **Script** : `app/scripts/fetch_unpaid_invoices.py`
+- **Script** : `app/scripts/relances/fetch_unpaid_invoices.py`
 - **Description** : Récupère les factures impayées depuis une base de données externe et les stocke dans `factures_impayees.db`.
-- **Spécifications** : [Voir le script](../scripts/relance_impayees/fetch_unpaid_invoices.spec)
+- **Spécifications** : [Voir le script](../../_app/scripts/relances/fetch_unpaid_invoices.spec.md)
 - **Exemple d'appel** :
   ```bash
-  python app/scripts/fetch_unpaid_invoices.py \
+  python app/scripts/relances/fetch_unpaid_invoices.py \
       --log "reports/ST-<NUM>-fetch_unpaid_invoices.log"
   ```
 
