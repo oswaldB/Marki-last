@@ -1,12 +1,37 @@
-# tests/unit/sidebar/test_sidebar.py
 import pytest
-from app.blueprints.sidebar.routes import get_nav_links
+from bs4 import BeautifulSoup
 
-def test_get_nav_links_success():
-    result = get_nav_links({"user_id": 1})
-    assert result["status"] == "success"
-    assert isinstance(result["data"], list)
+def test_sidebar_html_structure():
+    """Test la structure HTML de la sidebar."""
+    with open('app/templates/partials/sidebar.html', 'r') as f:
+        html = f.read()
 
-def test_get_nav_links_failure():
-    with pytest.raises(ValueError):
-        get_nav_links({"user_id": None})
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Test la présence des éléments principaux
+    assert soup.find('div', class_='sidebar-container') is not None
+    assert soup.find('aside') is not None
+    assert soup.find('nav') is not None
+    assert soup.find('div', class_='absolute bottom-0') is not None
+
+    # Test les liens de navigation
+    nav_links = soup.find_all('a')
+    assert len(nav_links) >= 4  # Dashboard, Commissions, Relances, Équipe
+    assert any('Dashboard' in link.text for link in nav_links)
+    assert any('Commissions' in link.text for link in nav_links)
+    assert any('Relances' in link.text for link in nav_links)
+
+def test_sidebar_responsive_behavior():
+    """Test le comportement responsive de la sidebar."""
+    with open('app/templates/partials/sidebar.html', 'r') as f:
+        html = f.read()
+
+    # Test la classe de toggle mobile
+    assert 'md:hidden' in html
+    assert 'fixed top-4 left-4' in html
+
+    # Test le script Alpine.js
+    assert 'sidebarState()' in html
+    assert 'toggleOpen()' in html
+    assert 'isOpen' in html
+    assert 'isLarge' in html

@@ -1,81 +1,38 @@
-# Routes : Application Principale
+# Routes : App
 **Fichier cible** : `app/blueprints/app/routes.py`
 
 ---
 
 ## **Endpoints**
 
-| URL | Méthode | Paramètres | Retour | Description |
-|-----|---------|-----------|--------|-------------|
-| `/dashboard` | GET | - | HTML | Page principale du tableau de bord |
-| `/profile` | GET | - | HTML | Profil de l'utilisateur connecté |
-| `/api/user/info` | GET | - | JSON | Informations de l'utilisateur |
-| `/api/dashboard/stats` | GET | - | JSON | Statistiques du tableau de bord |
+| URL                | Méthode | Paramètres          | Retour       | Description                     |
+|--------------------|---------|---------------------|--------------|---------------------------------|
+| `/`                | GET     | -                   | HTML         | Page d'accueil (redirige vers dashboard). |
+| `/dashboard`       | GET     | -                   | HTML         | Dashboard principal.           |
+| `/api/user/info`   | GET     | -                   | JSON         | Infos utilisateur pour Alpine.js. |
 
 ---
 
-## **Description des Routes**
+## **Exemple d'Implémentation**
+```python
+from flask import Blueprint, redirect, url_for, jsonify, render_template
 
-### `/dashboard` (GET)
-Affiche la page principale avec un tableau de bord.
+bp = Blueprint('app', __name__)
 
-**Template** : `app/dashboard.html`
-**Données requises** :
-- Statistiques (utilisateurs, revenus, etc.)
-- Informations de session
+@bp.route('/')
+def index():
+    return redirect(url_for('app.dashboard'))
 
-**Réponse** : HTML du tableau de bord
+@bp.route('/dashboard')
+def dashboard():
+    return render_template('app-layout.html')
 
----
-
-### `/profile` (GET)
-Affiche le profil de l'utilisateur connecté.
-
-**Template** : `app/profile.html`
-**Données requises** :
-- Informations utilisateur (id, username, email, createdAt)
-
-**Réponse** : HTML du profil
-
----
-
-### `/api/user/info` (GET)
-API pour récupérer les informations de l'utilisateur.
-
-**Réponse** :
-```json
-{
-  "status": "success",
-  "user": {
-    "id": 1,
-    "username": "admin",
-    "email": "admin@example.com",
-    "createdAt": "2023-01-01T00:00:00Z"
-  }
-}
-```
-
-**Codes d'erreur** :
-- `401` : Utilisateur non authentifié
-- `500` : Erreur serveur
-
----
-
-### `/api/dashboard/stats` (GET)
-API pour récupérer les statistiques du tableau de bord.
-
-**Réponse** :
-```json
-{
-  "status": "success",
-  "stats": {
-    "totalUsers": 10,
-    "activeUsers": 5,
-    "totalRevenue": 1000.00
-  }
-}
-```
-
-**Codes d'erreur** :
-- `401` : Utilisateur non authentifié
-- `500` : Erreur serveur
+@bp.route('/api/user/info')
+def user_info():
+    # Récupérer les infos utilisateur depuis la session ou la base de données
+    user_data = {
+        'username': 'admin',  # Exemple
+        'email': 'admin@example.com',
+        'isAdmin': True
+    }
+    return jsonify({'user': user_data})

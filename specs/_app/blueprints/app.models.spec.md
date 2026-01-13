@@ -1,87 +1,61 @@
-# Modèles : Application Principale
+# Modèles : App
 **Fichier cible** : `app/blueprints/app/models.py`
 
 ---
 
-## **Composants Alpine.js**
+## **Modèles SQLAlchemy**
 
-### `dashboardState()`
-Gère l'état du tableau de bord.
+### 1. User
+```python
+class User(db.Model):
+    __tablename__ = 'users'
 
-```javascript
-/**
- * Logique du tableau de bord.
- * @returns {Object}
- * @property {Object} stats - Statistiques affichées
- * @property {Boolean} isLoading - État de chargement
- * @property {Function} loadStats - Charge les statistiques
- */
-function dashboardState() {
-  return {
-    stats: {
-      totalUsers: 0,
-      activeUsers: 0,
-      totalRevenue: 0.00
-    },
-    isLoading: true,
-    
-    async loadStats() {
-      try {
-        const response = await fetch('/api/dashboard/stats');
-        const data = await response.json();
-        this.stats = data.stats;
-      } catch (error) {
-        console.error('Erreur chargement stats:', error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    
-    init() {
-      this.loadStats();
-    }
-  };
-}
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128))
+    is_admin = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Relations
+    notifications = db.relationship('Notification', backref='user', lazy=True)
+    relances = db.relationship('Relance', backref='user', lazy=True)
+```
+
+### 2. Notification
+```python
+class Notification(db.Model):
+    __tablename__ = 'notifications'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    message = db.Column(db.String(255), nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 ```
 
 ---
 
-### `profileState()`
-Gère l'état du profil utilisateur.
+## **Schémas Pydantic**
 
-```javascript
-/**
- * Logique du profil utilisateur.
- * @returns {Object}
- * @property {Object} user - Données utilisateur
- * @property {Boolean} isLoading - État de chargement
- * @property {Function} loadUser - Charge les infos utilisateur
- */
-function profileState() {
-  return {
-    user: {
-      id: null,
-      username: '',
-      email: '',
-      createdAt: ''
-    },
-    isLoading: true,
-    
-    async loadUser() {
-      try {
-        const response = await fetch('/api/user/info');
-        const data = await response.json();
-        this.user = data.user;
-      } catch (error) {
-        console.error('Erreur chargement profil:', error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    
-    init() {
-      this.loadUser();
-    }
-  };
-}
+### 1. UserSchema
+```python
+from pydantic import BaseModel, EmailStr
+
+class UserSchema(BaseModel):
+    username: str
+    email: EmailStr
+    is_admin: bool = False
+
+    class Config:
+        from_attributes = True
 ```
+
+### 2. NotificationSchema
+```python
+class NotificationSchema(BaseModel):
+    message: str
+    is_read: bool = False
+
+    class Config:
+        from_attributes = True
