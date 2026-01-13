@@ -355,6 +355,6 @@ Ce blueprint permet de gérer les relances des factures impayées. Il inclut des
 
 ## Liens
 
-- [Spécifications des scripts backend](scripts/relance_impayees/)
-- [Schéma SQL](bdd/relance_impayees.sql)
+- [Spécifications des scripts backend](scripts/relances/)
+- [Schéma SQL](bdd/relances.sql)
 - [Scénarios Gherkin](features/relance_impayees.feature)
