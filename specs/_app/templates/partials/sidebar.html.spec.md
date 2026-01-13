@@ -1,0 +1,99 @@
+# Partial : Sidebar
+**Fichier cible** : `app/templates/partials/sidebar.html`
+
+---
+
+## **Description**
+Barre latérale de navigation. Visible par défaut sur desktop (≥1024px), masquée sur mobile (<1024px) avec toggle.
+
+---
+
+## **Structure HTML**
+```html
+<div class="sidebar-container" x-data="sidebarState()" x-ref="sidebar">
+  <!-- Sidebar Toggle Button (Mobile) -->
+  <button class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-primary text-white"
+          @click="toggleOpen()">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+
+  <!-- Sidebar -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-border shadow-lg transition-transform duration-300"
+         :class="{ '-translate-x-full': !isOpen && !isLarge }" @click.away="isOpen = false">
+    
+    <!-- Header -->
+    <div class="p-6 border-b border-border">
+      <h1 class="text-2xl font-bold text-primary">Marki</h1>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="py-4">
+      <ul class="space-y-2">
+        <li>
+          <a href="/dashboard" class="flex items-center px-6 py-3 text-text hover:bg-bg-light transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        
+        <li>
+          <a href="/commissions" class="flex items-center px-6 py-3 text-text hover:bg-bg-light transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4zm3 1h6v2H7V5zm0 4h6v2H7V9z"></path>
+            </svg>
+            Commissions
+          </a>
+        </li>
+
+        <li>
+          <a href="/relances" class="flex items-center px-6 py-3 text-text hover:bg-bg-light transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.5 3A1.5 1.5 0 001 4.5v.006c0 .649.122 1.269.357 1.852.035.088.07.176.108.262a2 2 0 101.847 3.656 6 6 0 009.143-5.653 2 2 0 00-1.885-2.707A6.993 6.993 0 0010 3.5c-4.157 0-7.8 2.236-9.75 5.57.033-.079.063-.158.09-.238A1.5 1.5 0 002.5 3z"></path>
+            </svg>
+            Relances
+          </a>
+        </li>
+
+        <li x-show="user.isAdmin" class="border-t border-border pt-4 mt-4">
+          <a href="/settings/team" class="flex items-center px-6 py-3 text-text hover:bg-bg-light transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+            </svg>
+            Équipe
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Footer -->
+    <div class="absolute bottom-0 w-full p-4 border-t border-border bg-bg-light">
+      <p class="text-xs text-text-light">Version 1.0.0</p>
+    </div>
+  </aside>
+</div>
+
+<script>
+  function sidebarState() {
+    return {
+      isOpen: window.innerWidth >= 1024,
+      isLarge: window.innerWidth >= 1024,
+      user: Alpine.$data(document.querySelector('[x-data="appLayoutState()"]')).user,
+      
+      toggleOpen() {
+        this.isOpen = !this.isOpen;
+      },
+      
+      init() {
+        window.addEventListener('resize', () => {
+          this.isLarge = window.innerWidth >= 1024;
+          if (this.isLarge) this.isOpen = true;
+        });
+      }
+    };
+  }
+</script>
+```

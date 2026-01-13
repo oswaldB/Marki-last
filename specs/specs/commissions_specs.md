@@ -8,27 +8,33 @@ Permettre aux utilisateurs de gérer les commissions, y compris la validation, l
 
 ## 2. Structure des Données
 
-### 2.1. Tables SQL
+### 2.1. Collections PickleDB
 
-#### Table `commissions`
-```sql
-CREATE TABLE commissions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nfacture TEXT NOT NULL,
-    ndossier TEXT NOT NULL,
-    reference_piece TEXT NOT NULL,
-    intervenant TEXT NOT NULL,
-    montant_ht REAL NOT NULL,
-    montant_ttc REAL NOT NULL,
-    date_piece TEXT NOT NULL,
-    lien_facture TEXT NOT NULL,
-    statut TEXT NOT NULL DEFAULT 'valide' CHECK (statut IN ('valide', 'conflit', 'archive')),
-    date_reglement TEXT,
-    conflit_detail TEXT,
-    monotech BOOLEAN DEFAULT FALSE,
-    mono_dossier BOOLEAN DEFAULT FALSE
-);
-```
+La base de données `commissions.db` est organisée en collections PickleDB pour stocker les informations relatives aux commissions.
+
+#### Collection `commissions`
+
+Stocke les informations sur les commissions générées pour les techniciens.
+
+**Clé Primaire** : `nfacture` (Numéro de facture, unique)
+
+**Champs** :
+
+| Champ               | Type      | Description                                                                 | Exemple                     |
+|---------------------|-----------|-----------------------------------------------------------------------------|-----------------------------|
+| `nfacture`          | String    | Numéro de facture unique.                                                   | "FACT-2026-001"           |
+| `ndossier`          | String    | Numéro de dossier associé à la facture.                                     | "DOSS-2026-001"          |
+| `reference_piece`   | String    | Référence de la pièce associée à la facture.                                | "PIECE-2026-001"         |
+| `intervenant`       | String    | Identifiant de l'intervenant associé à la commission.                       | "tech_123"                |
+| `montant_ht`        | Float     | Montant total HT de la facture.                                             | 1500.00                     |
+| `montant_ttc`       | Float     | Montant total TTC de la facture.                                            | 1800.00                     |
+| `date_piece`        | String    | Date de la pièce (format : YYYY-MM-DD).                                     | "2026-01-12"              |
+| `lien_facture`      | String    | Lien vers la facture PDF.                                                   | "/path/to/facture.pdf"    |
+| `statut`            | String    | Statut de la commission (ex: "valide", "conflit", "archive").           | "valide"                  |
+| `date_reglement`    | String    | Date de règlement de la commission (format : YYYY-MM-DD).                   | "2026-01-15"              |
+| `conflit_detail`    | String    | Détails du conflit si le statut est "conflit".                              | "Conflit de montant"      |
+| `monotech`          | Boolean   | Indique si la facture est associée à un seul technicien.                     | true                       |
+| `mono_dossier`      | Boolean   | Indique si la facture est associée à un seul dossier.                       | true                       |
 
 > **Note** : Le champ `statut` est restreint aux valeurs suivantes :
 > - `valide` : Commission validée et prête à être réglée.
@@ -104,6 +110,16 @@ CREATE TABLE commissions (
       --log "reports/ST-<NUM>-process_commissions.log"
   ```
 
+### 6.2. Récupération des Factures Impayées
+- **Script** : `app/scripts/fetch_unpaid_invoices.py`
+- **Description** : Récupère les factures impayées depuis une base de données externe et les stocke dans `factures_impayees.db`.
+- **Spécifications** : [Voir le script](../scripts/relance_impayees/fetch_unpaid_invoices.spec)
+- **Exemple d'appel** :
+  ```bash
+  python app/scripts/fetch_unpaid_invoices.py \
+      --log "reports/ST-<NUM>-fetch_unpaid_invoices.log"
+  ```
+
 ## 6. Composants Alpine.js
 
 ### 6.1. `commission_form.html`
@@ -172,3 +188,4 @@ CREATE TABLE commissions (
 - [Styleguide](utils/styleguide.md)
 - [Scénarios Gherkin](specs/features/commissions.feature)
 - [Spécifications techniques](specs/_app/commissions_valides.html.spec)
+- [Base de données](bdd/commissions.md)
