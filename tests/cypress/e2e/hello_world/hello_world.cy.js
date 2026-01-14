@@ -1,6 +1,22 @@
 describe('ST-002: Hello World Page', () => {
+  const consoleErrors = [];
+
   beforeEach(() => {
+    cy.on('uncaught:exception', (err) => {
+      consoleErrors.push({
+        name: err.name,
+        message: err.message,
+        stack: err.stack,
+      });
+      return false;
+    });
     cy.visit('/hello');
+  });
+
+  afterEach(() => {
+    if (consoleErrors.length > 0) {
+      cy.writeFile('reports/ST-002-console-errors.json', consoleErrors);
+    }
   });
 
   it('ST-002: Should display the logo', () => {
