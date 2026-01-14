@@ -22,7 +22,7 @@ def main():
     # Configuration du serveur
     host = os.environ.get('FLASK_HOST', '0.0.0.0')
     port = int(os.environ.get('FLASK_PORT', 5000))
-    debug = 'true'
+    debug = True
     
     print(f"Configuration:")
     print(f"  Hôte: {host}")

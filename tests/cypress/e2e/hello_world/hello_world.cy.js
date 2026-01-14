@@ -51,7 +51,7 @@ describe('ST-002: Hello World Page', () => {
 
   it('ST-002: Should display the logo', () => {
     cy.get('img.logo').should('be.visible');
-    cy.get('img.logo').should('have.attr', 'src', '/public/logo.png');
+    cy.get('img.logo').invoke('attr', 'src').should('include', '/static/logo.png');
     cy.get('img.logo').should('have.attr', 'alt', 'Logo Marki');
   });
 

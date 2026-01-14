@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <img src="/public/logo.png" alt="Logo Marki" class="logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Marki" class="logo">
     <div class="message">Hello, World!</div>
 </body>
 </html>
