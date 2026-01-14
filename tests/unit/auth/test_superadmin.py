@@ -29,6 +29,7 @@ def test_superadmin_route_get(client):
     response = client.get('/superadmin')
     assert response.status_code == 200
     assert b'Creer le Premier Administrateur' in response.data
+    assert b'Marki - Gestion des Commissions' in response.data
 
 
 def test_superadmin_route_post_invalid_password(client):

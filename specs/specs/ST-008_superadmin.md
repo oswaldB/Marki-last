@@ -58,7 +58,7 @@ La page Superadmin est une page sécurisée qui permet de créer le premier util
 
 ### **3.2. Frontend**
 - **Fichier** : `app/templates/auth/superadmin.html`
-- **Template** : Utilise `app-layout.html` comme layout de base.
+- **Template** : Utilise `base.html` comme layout de base (sans `app-layout.html`).
 - **Composants Alpine.js** :
   - `superadminFormState()` : Gère l'état du formulaire.
   - `passwordStrength()` : Vérifie la force du mot de passe.
