@@ -1,0 +1,8 @@
+[
+  {
+    "type": "network",
+    "url": "http://localhost:5000/public/logo.png",
+    "status": 404,
+    "message": "Failed to load resource: the server responded with a status of 404 (NOT FOUND)"
+  }
+]

@@ -2,6 +2,17 @@ describe('ST-002: Hello World Page', () => {
   const consoleErrors = [];
 
   beforeEach(() => {
+    // Capture console errors
+    cy.on('window:console', (str, args) => {
+      if (str === 'error' || str === 'warn') {
+        consoleErrors.push({
+          type: str,
+          message: args[0],
+          stack: args[1] ? args[1].stack : undefined,
+        });
+      }
+    });
+
     cy.on('uncaught:exception', (err) => {
       consoleErrors.push({
         name: err.name,
@@ -10,13 +21,32 @@ describe('ST-002: Hello World Page', () => {
       });
       return false;
     });
+
     cy.visit('/hello');
   });
 
   afterEach(() => {
-    if (consoleErrors.length > 0) {
-      cy.writeFile('reports/ST-002-console-errors.json', consoleErrors);
-    }
+    // Check for network errors
+    cy.window().then((win) => {
+      const performanceEntries = win.performance.getEntries();
+      const networkErrors = performanceEntries.filter((entry) => {
+        return entry.initiatorType === 'img' && entry.responseStatus === 404;
+      });
+
+      if (networkErrors.length > 0) {
+        const errors = networkErrors.map((entry) => ({
+          type: 'network',
+          url: entry.name,
+          status: entry.responseStatus,
+          message: `Failed to load resource: the server responded with a status of ${entry.responseStatus} (NOT FOUND)`,
+        }));
+        cy.writeFile('reports/ST-002-console-errors.json', errors);
+      }
+
+      if (consoleErrors.length > 0) {
+        cy.writeFile('reports/ST-002-console-errors.json', consoleErrors);
+      }
+    });
   });
 
   it('ST-002: Should display the logo', () => {
