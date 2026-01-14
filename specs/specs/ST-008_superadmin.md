@@ -375,7 +375,7 @@ function superadminFormState() {
 
 ## **8. Liens**
 
-- [Spécifications techniques des routes](../../_app/blueprints/ST-008_auth.routes.spec.md)
+- [Spécifications techniques des routes](../../_app/blueprints/auth/superadmin.routes.spec.md)
 - [Spécifications techniques du template](../../_app/templates/auth/ST-008_superadmin.html.spec.md)
 - [Modèle User](../../bdd/auth/ST-003_users.md)
 
