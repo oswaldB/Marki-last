@@ -121,6 +121,72 @@ function registerFormState() {
 
 ---
 
+### `superadminFormState()`
+Gère le formulaire de création du premier administrateur.
+
+```javascript
+/**
+ * Logique du formulaire de création du premier administrateur.
+ * @returns {Object}
+ * @property {Object} form - Données du formulaire
+ * @property {Boolean} isLoading - État de chargement
+ * @property {String} error - Message d'erreur
+ * @property {String} success - Message de succès
+ * @property {Function} passwordStrength - Vérifie la force du mot de passe
+ * @property {Function} submitForm - Soumet le formulaire
+ */
+function superadminFormState() {
+  return {
+    form: {
+      superadminPassword: '',
+      username: '',
+      password: '',
+      confirmPassword: ''
+    },
+    isLoading: false,
+    error: '',
+    success: '',
+    
+    passwordStrength() {
+      if (this.form.password.length === 0) return '';
+      return 'Mot de passe valide.';
+    },
+    
+    async submitForm() {
+      this.isLoading = true;
+      this.error = '';
+      this.success = '';
+      
+      try {
+        const response = await fetch('/superadmin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token() }}'
+          },
+          body: JSON.stringify(this.form)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          this.success = data.message;
+          window.location.href = '/auth/login';
+        } else {
+          this.error = data.error || 'Une erreur est survenue.';
+        }
+      } catch (error) {
+        this.error = 'Une erreur est survenue. Veuillez réessayer.';
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  };
+}
+```
+
+---
+
 ### `teamManagementState(users)`
 Gère la liste et les actions sur les utilisateurs (Admin).
 

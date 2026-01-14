@@ -14,8 +14,8 @@
 | `/auth/logout` | POST | - | Redirect | Déconnecte l'utilisateur |
 | `/auth/forgot-password` | GET | - | HTML | Formulaire de récupération |
 | `/auth/forgot-password` | POST | `username` | Redirect | Génère mot de passe temporaire |
-| `/superadmin` | GET | - | HTML | Page création premier admin |
-| `/superadmin` | POST | `password` | Redirect | Valide accès superadmin |
+| `/superadmin` | GET | - | HTML | Affiche le formulaire de création du premier administrateur |
+| `/superadmin` | POST | `superadmin_password`, `username`, `password`, `confirm_password` | Redirect | Crée le premier administrateur et redirige vers `/auth/login` |
 | `/settings/team` | GET | - | HTML | Gestion des utilisateurs (admin) |
 | `/api/users` | GET | - | JSON | Liste des utilisateurs |
 | `/api/users/add` | POST | `username`, `password`, `email` | JSON | Ajoute collaborateur |
@@ -41,6 +41,12 @@
 - Générer un mot de passe temporaire aléatoire (12 caractères)
 - Afficher le mot de passe à l'écran UNE SEULE FOIS
 - Forcer changement au prochain login
+
+### Superadmin
+- Accessible uniquement avec le mot de passe `Citron6-Mustang9`
+- Vérifie qu'aucun administrateur n'existe déjà avant de créer un nouvel utilisateur
+- L'utilisateur créé doit avoir le rôle `admin` et le statut `actif`
+- Après création, redirige vers `/auth/login`
 
 ### Gestion Équipe (Admin)
 - Accessible **uniquement** si `isAdmin = true`
