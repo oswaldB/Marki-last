@@ -17,7 +17,7 @@
 | ST-005 | Relance des Factures Impayées | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
 | ST-006 | Sidebar | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
 | ST-007 | Topbar | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
-| ST-008 | Page Superadmin - Création du Premier Administrateur | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
+| ST-008 | Page Superadmin - Création du Premier Administrateur | ✅ Validé | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
