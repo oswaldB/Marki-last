@@ -1,10 +1,23 @@
-from flask import Flask, render_template, request
-from app.blueprints.auth import auth_bp
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+
+db = SQLAlchemy()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'votre-clé-secrète-ici'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marki.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Enregistrement du blueprint d'authentification
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    from app.blueprints.app import app_bp
+    from app.blueprints.auth import auth_bp
+
+    app.register_blueprint(app_bp)
     app.register_blueprint(auth_bp)
 
     return app

@@ -28,7 +28,6 @@
       "notaire_nom": "Bernard",
       "notaire_email": "pierre.bernard@example.com",
       "payeur": "proprietaire",
-      "recipient": "jean.dupont@example.com",
       "statut": "pending",
       "content": "Bonjour Jean,\n\nVotre facture FACT-2026-001...",
       "date": "2026-01-13T18:00:00Z",
