@@ -10,7 +10,7 @@ def index():
 @app_bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('app-layout.html')
+    return render_template('dashboard.html')
 
 @app_bp.route('/hello')
 def hello():
