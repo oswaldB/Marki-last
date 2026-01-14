@@ -1,7 +1,7 @@
 from behave import given, when, then
 from flask import Flask, template_rendered
 from contextlib import contextmanager
-from app import app as flask_app
+from app import create_app
 
 @contextmanager
 def captured_templates(app):

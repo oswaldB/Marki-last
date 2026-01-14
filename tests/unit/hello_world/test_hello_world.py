@@ -1,12 +1,10 @@
 import pytest
 from flask import Flask, template_rendered
 from app import create_app
-from app.blueprints.app.routes import app_bp
 
 @pytest.fixture
 def app():
     app = create_app()
-    app.register_blueprint(app_bp)
     return app
 
 @pytest.fixture

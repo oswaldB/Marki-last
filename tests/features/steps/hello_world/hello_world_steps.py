@@ -7,10 +7,6 @@ def step_impl(context):
     context.app = create_app()
     context.client = context.app.test_client()
 
-@when(u'je visite la page "/hello"')
-def step_impl(context):
-    context.response = context.client.get('/hello')
-
 @then(u'je devrais voir un élément "img" avec l\'attribut "src" égal à "/public/logo.png"')
 def step_impl(context):
     assert context.response.status_code == 200

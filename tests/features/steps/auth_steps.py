@@ -8,10 +8,6 @@ def step_impl(context, url):
     context.client = context.app.test_client()
     context.response = context.client.get(url)
 
-@when(u'je visite la page "{url}"')
-def step_impl(context, url):
-    context.response = context.client.get(url)
-
 @given(u'je suis sur la page "{url}" avec le layout `app-layout.html`')
 def step_impl(context, url):
     context.app = create_app()
@@ -62,22 +58,11 @@ def step_impl(context, url):
     assert context.response.status_code == 302
     assert context.response.location == url
 
-@then(u'je dois voir le message "{message}"')
-def step_impl(context, message):
-    data = context.response.get_json()
-    assert data['status'] == 'error'
-    assert data['message'] == message
-
 @then(u'je dois voir le drawer pour changer le mot de passe')
 def step_impl(context):
     assert context.response.status_code == 200
     data = context.response.get_json()
     assert data['drawer']['isOpen'] == True
-
-@then(u'je dois être redirigé vers la page de login')
-def step_impl(context):
-    assert context.response.status_code == 302
-    assert context.response.location == '/auth/login'
 
 @then(u'je dois être redirigé vers la page de création de compte')
 def step_impl(context):
@@ -111,29 +96,11 @@ def step_impl(context):
         'password': 'password'
     })
 
-@when(u'je clique sur "{action}" pour l\'utilisateur "{username}"')
-def step_impl(context, action, username):
-    if action == "Bloquer":
-        context.response = context.client.post('/api/settings/team/block', json={
-            'userId': 1
-        })
-    elif action == "Débloquer":
-        context.response = context.client.post('/api/settings/team/unblock', json={
-            'userId': 1
-        })
-    elif action == "Changer le mot de passe":
-        context.newPassword = 'newpassword'
+
 
 @when(u'je saisis le nouveau mot de passe "{password}"')
 def step_impl(context, password):
     context.newPassword = password
-
-@when(u'je clique sur "Enregistrer"')
-def step_impl(context):
-    context.response = context.client.post('/api/settings/team/change_password', json={
-        'userId': 1,
-        'newPassword': context.newPassword
-    })
 
 @given(u'le premier administrateur est déjà créé')
 def step_impl(context):
