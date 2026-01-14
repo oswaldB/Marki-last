@@ -15,7 +15,11 @@ def login():
 
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
-            return redirect(url_for('app.dashboard'))
+            # Vérifier que l'utilisateur est bien connecté avant la redirection
+            if current_user.is_authenticated:
+                return redirect(url_for('app.dashboard'))
+            else:
+                flash('Problème de session, veuillez réessayer', 'error')
         else:
             flash('Email ou mot de passe incorrect', 'error')
 
