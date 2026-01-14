@@ -30,6 +30,7 @@ def test_superadmin_route_get(client):
     assert response.status_code == 200
     assert b'Creer le Premier Administrateur' in response.data
     assert b'Marki - Gestion des Commissions' in response.data
+    assert b'/public/logo.png' in response.data
 
 
 def test_superadmin_route_post_invalid_password(client):
@@ -42,6 +43,13 @@ def test_superadmin_route_post_invalid_password(client):
     }, follow_redirects=True)
     assert response.status_code == 200
     assert b'Mot de passe superadmin incorrect.' in response.data
+
+
+def test_superadmin_route_get_fields_hidden(client):
+    """Test que les champs sont masqués tant que le mot de passe superadmin n'est pas valide."""
+    response = client.get('/superadmin')
+    assert response.status_code == 200
+    assert b'x-show="form.superadminPassword === \'Citron6-Mustang9\'' in response.data
 
 
 def test_superadmin_route_post_password_mismatch(client):

@@ -2,6 +2,9 @@
 
 {% block content %}
 <div x-data="superadminFormState()" class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  <div class="flex justify-center mb-6">
+    <img src="/public/logo.png" alt="Logo Marki" class="h-16 w-auto">
+  </div>
   <h1 class="text-2xl font-bold text-text mb-6">Creer le Premier Administrateur</h1>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -22,26 +25,29 @@
              class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
     </div>
 
-    <!-- Nom d'Utilisateur -->
-    <div>
-      <label for="username" class="block text-sm font-medium text-text-light">Nom d'utilisateur</label>
-      <input type="text" id="username" x-model="form.username" required
-             class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
-    </div>
+    <!-- Autres champs masqués tant que le mot de passe superadmin n'est pas valide -->
+    <div x-show="form.superadminPassword === 'Citron6-Mustang9'">
+      <!-- Nom d'Utilisateur -->
+      <div>
+        <label for="username" class="block text-sm font-medium text-text-light">Nom d'utilisateur</label>
+        <input type="text" id="username" x-model="form.username" required
+               class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+      </div>
 
-    <!-- Mot de Passe -->
-    <div>
-      <label for="password" class="block text-sm font-medium text-text-light">Mot de passe</label>
-      <input type="password" id="password" x-model="form.password" required
-             class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
-      <p class="mt-2 text-sm text-text-light" x-text="passwordStrength()"></p>
-    </div>
+      <!-- Mot de Passe -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-text-light">Mot de passe</label>
+        <input type="password" id="password" x-model="form.password" required
+               class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+        <p class="mt-2 text-sm text-text-light" x-text="passwordStrength()"></p>
+      </div>
 
-    <!-- Confirmation du Mot de Passe -->
-    <div>
-      <label for="confirm_password" class="block text-sm font-medium text-text-light">Confirmation du mot de passe</label>
-      <input type="password" id="confirm_password" x-model="form.confirmPassword" required
-             class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+      <!-- Confirmation du Mot de Passe -->
+      <div>
+        <label for="confirm_password" class="block text-sm font-medium text-text-light">Confirmation du mot de passe</label>
+        <input type="password" id="confirm_password" x-model="form.confirmPassword" required
+               class="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+      </div>
     </div>
 
     <!-- Bouton de Soumission -->

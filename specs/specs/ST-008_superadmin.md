@@ -22,14 +22,15 @@ La page Superadmin est une page sécurisée qui permet de créer le premier util
 
 ### **2.2. Formulaire de Création**
 - **Champs** :
-  - **Mot de Passe** : Champ de texte pour saisir le mot de passe.
+  - **Mot de Passe Superadmin** : Champ de texte pour saisir le mot de passe. Les autres champs du formulaire sont masqués tant que ce champ n'est pas rempli et validé.
   - **Nom d'Utilisateur** : Champ de texte pour le nom du premier administrateur.
   - **Mot de Passe Utilisateur** : Champ de texte pour le mot de passe du premier administrateur.
   - **Confirmation du Mot de Passe** : Champ de texte pour confirmer le mot de passe.
 - **Bouton** : "Créer le Premier Administrateur"
+- **Logo** : Le logo Marki doit être affiché en haut de la page.
 
 ### **2.3. Validation**
-- **Mot de Passe Superadmin** : Doit être `Citron6-Mustang9`.
+- **Mot de Passe Superadmin** : Doit être `Citron6-Mustang9`. Les autres champs du formulaire sont masqués tant que ce champ n'est pas rempli et validé.
 - **Nom d'Utilisateur** : Doit être unique et non vide.
 - **Mot de Passe Utilisateur** : Doit être non vide.
 - **Confirmation du Mot de Passe** : Doit correspondre au mot de passe utilisateur.
@@ -60,8 +61,9 @@ La page Superadmin est une page sécurisée qui permet de créer le premier util
 - **Fichier** : `app/templates/auth/superadmin.html`
 - **Template** : Utilise `base.html` comme layout de base (sans `app-layout.html`).
 - **Composants Alpine.js** :
-  - `superadminFormState()` : Gère l'état du formulaire.
+  - `superadminFormState()` : Gère l'état du formulaire et masque les autres champs tant que le mot de passe superadmin n'est pas rempli et validé.
   - `passwordStrength()` : Vérifie la force du mot de passe.
+- **Logo** : Le logo Marki doit être affiché en haut de la page.
 
 ### **3.3. Base de Données**
 - **Table** : `users`
