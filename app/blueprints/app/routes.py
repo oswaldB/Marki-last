@@ -12,6 +12,10 @@ def index():
 def dashboard():
     return render_template('app-layout.html')
 
+@app_bp.route('/hello')
+def hello():
+    return render_template('hello.html')
+
 @app_bp.route('/api/user/info')
 @login_required
 def user_info():
