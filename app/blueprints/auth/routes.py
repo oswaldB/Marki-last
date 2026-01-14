@@ -9,26 +9,33 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
+        username = request.form.get('username')
         password = request.form.get('password')
-        user = User.query.filter_by(email=email).first()
+        remember = request.form.get('remember') == 'on'
+        print(f"Tentative de connexion avec username: {username}, remember: {remember}")
+        user = User.query.filter_by(username=username).first()
 
         if user and check_password_hash(user.password_hash, password):
-            login_user(user)
+            login_user(user, remember=remember)
             # Vérifier que l'utilisateur est bien connecté avant la redirection
             if current_user.is_authenticated:
+                print(f"Utilisateur connecté: {current_user.username}")
                 return redirect(url_for('app.dashboard'))
             else:
                 flash('Problème de session, veuillez réessayer', 'error')
+                return redirect(url_for('auth.login'))
         else:
-            flash('Email ou mot de passe incorrect', 'error')
+            print(f"Échec de la connexion pour username: {username}")
+            flash('Identifiant ou mot de passe incorrect', 'error')
+            return redirect(url_for('auth.login'))
 
     return render_template('auth/login.html')
 
-@auth_bp.route('/logout')
+@auth_bp.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
+    flash('Vous avez été déconnecté avec succès', 'success')
     return redirect(url_for('auth.login'))
 
 @auth_bp.route('/superadmin', methods=['GET', 'POST'])

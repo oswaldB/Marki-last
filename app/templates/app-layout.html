@@ -10,6 +10,19 @@
     <!-- Topbar -->
     {% include "partials/topbar.html" %}
 
+    <!-- Flash Messages -->
+    <div class="p-6">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="mb-4 p-4 bg-{{ 'green' if category == 'success' else 'red' }}-100 border border-{{ 'green' if category == 'success' else 'red' }}-400 text-{{ 'green' if category == 'success' else 'red' }}-700 rounded">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
     <!-- Content -->
     <main class="flex-1 overflow-auto p-6">
       {% block page_content %}{% endblock %}
