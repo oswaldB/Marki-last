@@ -23,5 +23,8 @@
   "homepage": "https://github.com/oswaldB/Marki-last#readme",
   "devDependencies": {
     "cypress": "^15.9.0"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.57.0"
   }
 }

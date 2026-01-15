@@ -1,6 +1,6 @@
 # Suivi des Spécifications Techniques (ST)
 
-**Date** : 2026-01-14
+**Date** : 2024-10-04
 **Auteur** : Mistral Vibe
 **Statut** : En cours
 
@@ -10,14 +10,14 @@
 
 | ST | Titre | Statut | Spécifications | Tests | Implémentation | Erreurs Console |
 |----|-------|--------|---------------|-------|----------------|-----------------|
-| ST-001 | Layout Principal de l'Application | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
-| ST-002 | Page Hello World avec Logo | ✅ Validé | ✅ | ✅ | ✅ | ✅ |
-| ST-003 | Authentification | ❌ En cours | ✅ | ❌ | ❌ | ❌ |
-| ST-004 | Gestion des Commissions | ❌ En cours | ✅ | ❌ | ❌ | ❌ |
-| ST-005 | Relance des Factures Impayées | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
-| ST-006 | Sidebar | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
-| ST-007 | Topbar | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
-| ST-008 | Page Superadmin - Création du Premier Administrateur | ✅ Validé | ✅ | ✅ | ✅ | ✅ |
+| ST-001 | Hello World | ✅ Validé | ✅ | ✅ | ✅ | ❌ |
+| ST-002 | Base Layout avec Tailwind et Alpine.js | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
+| ST-003 | Layout Dashboard avec Sidebar et Topbar | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
+| ST-004 | Layout Simple sans Authentification | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
+| ST-005 | Layout Simple avec Authentification | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
+| ST-006 | Page de Connexion | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
+| ST-007 | Mot de Passe Oublié | ❌ Non commencé | ❌ | ❌ | ❌ | ❌ |
+| ST-008 | Page SuperAdmin | ✅ Validé | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
