@@ -30,23 +30,33 @@ def validate_admin_data(data):
         errors.append('name')
     return errors
 
-@bp.route('/superadmin/entrance', methods=['GET', 'POST'])
-def entrance():
-    if request.method == 'POST':
-        password = request.form.get('password')
-        if password == 'Citron6-Mustang9':
-            session['authenticated'] = True
-            return redirect(url_for('auth.superadmin'))
-        else:
-            return render_template('superadmin/entrance.html', error='Mot de passe incorrect')
-    return render_template('superadmin/entrance.html')
+# Old entrance route - kept for reference but not used in single-screen mode
+# @bp.route('/superadmin/entrance', methods=['GET', 'POST'])
+# def entrance():
+#     if request.method == 'POST':
+#         password = request.form.get('password')
+#         if password == 'Citron6-Mustang9':
+#             session['authenticated'] = True
+#             return redirect(url_for('auth.superadmin'))
+#         else:
+#             return render_template('superadmin/entrance.html', error='Mot de passe incorrect')
+#     return render_template('superadmin/entrance.html')
 
 @bp.route('/superadmin')
 def superadmin():
-    if not session.get('authenticated'):
-        return redirect(url_for('auth.entrance'))
-    admins = get_all_admins()
-    return render_template('superadmin/superadmin.html', admins=admins)
+    """
+    Single screen superadmin interface with frontend authentication.
+    
+    This route serves a single page that handles both authentication and admin management.
+    Authentication is done in the frontend using Alpine.js and localStorage.
+    The API endpoints still require backend authentication via session.
+    
+    WARNING: This is for DEVELOPMENT ONLY. The password is visible in the source code.
+    For production, use the traditional backend authentication system.
+    """
+    # Single screen version - authentication handled in frontend
+    # No backend authentication required for this route
+    return render_template('superadmin/superadmin_single.html')
 
 # API Endpoints
 @bp.route('/api/admins', methods=['GET'])
