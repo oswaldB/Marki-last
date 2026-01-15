@@ -4,7 +4,7 @@
   <div class="flex items-center justify-center min-h-screen bg-bg-light">
     <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
       <div class="text-center">
-        <img src="/static/logo.png" alt="Logo Marki" class="w-32 h-auto mx-auto mb-6">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Marki" class="w-32 h-auto mx-auto mb-6">
         <h1 class="text-3xl font-semibold text-text">Accès Superadmin</h1>
       </div>
       <form method="POST" class="mt-8 space-y-6">

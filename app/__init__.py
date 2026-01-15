@@ -1,30 +1,17 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 
-db = SQLAlchemy()
-login_manager = LoginManager()
+app = Flask(__name__,
+            static_folder='static',
+            static_url_path='/static')
 
-def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'votre-clé-secrète-ici'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marki.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Configuration de la clé secrète pour les sessions
+app.secret_key = 'votre_cle_secrete_ici_changer_en_production_12345'
 
-    db.init_app(app)
-    login_manager.init_app(app)
+# Configuration des assets statiques
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 3600  # Cache 1 heure pour les assets
 
-    # Configure le user_loader pour Flask-Login
-    from app.models import User
-    
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+from app.blueprints.app.routes import bp as app_bp
+from app.blueprints.auth.routes import bp as auth_bp
 
-    from app.blueprints.app.routes import app_bp
-    from app.blueprints.auth.routes import auth_bp
-
-    app.register_blueprint(app_bp)
-    app.register_blueprint(auth_bp)
-
-    return app
+app.register_blueprint(app_bp)
+app.register_blueprint(auth_bp)
