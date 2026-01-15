@@ -1,13 +1,60 @@
 {% extends "layouts/simple-layout.html" %}
 
 {% block page_content %}
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4 py-8" x-data="superadminApp()" x-init="checkAuth(); loadAdmins()">
+    <!-- Loading indicator -->
+    <div x-show="loading" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex items-center space-x-2">
+          <div class="w-6 h-6 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <span class="text-text">Chargement...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error notification -->
+    <div x-show="error" class="fixed top-4 right-4 z-50">
+      <div class="bg-error text-white p-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <span x-text="error"></span>
+        <button @click="error = null" class="text-white hover:text-error-light">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Success notification -->
+    <div x-show="success" class="fixed top-4 right-4 z-50">
+      <div class="bg-primary text-white p-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <span x-text="success"></span>
+        <button @click="success = null" class="text-white hover:text-primary-light">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Header -->
     <div class="text-center mb-8">
       <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Marki" class="w-32 h-auto mx-auto mb-4">
       <h1 class="text-4xl font-bold text-text">Gestion des Admins</h1>
     </div>
-    <div id="admins-list" class="mb-8">
-      <h2 class="text-2xl font-semibold text-text mb-4">Liste des Admins</h2>
+
+    <!-- Admins List -->
+    <div class="mb-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold text-text">Liste des Admins</h2>
+        <button @click="showCreateForm = !showCreateForm" 
+                class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+          <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Nouveau Admin
+        </button>
+      </div>
+
       <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-border">
         <table class="min-w-full divide-y divide-border">
           <thead class="bg-bg-light">
@@ -19,38 +66,276 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-border">
-            {% for admin in admins %}
+            <template x-for="admin in admins" :key="admin.id">
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-text">{{ loop.index }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-text">{{ admin.username }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-text">{{ admin.name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-text" x-text="admin.id"></td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-text" x-text="admin.username"></td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-text" x-text="admin.name"></td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <a href="/superadmin/update/{{ loop.index }}" id="edit-admin-{{ loop.index }}" class="text-primary hover:text-primary-dark mr-2">Modifier</a>
-                  <a href="/superadmin/delete/{{ loop.index }}" id="delete-admin-{{ loop.index }}" class="text-error hover:text-error-dark">Supprimer</a>
+                  <button @click="prepareEdit(admin)" 
+                          class="text-primary hover:text-primary-dark mr-2 focus:outline-none">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                    </svg>
+                    Modifier
+                  </button>
+                  <button @click="deleteAdmin(admin.id)" 
+                          class="text-error hover:text-error-dark focus:outline-none">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    Supprimer
+                  </button>
                 </td>
               </tr>
-            {% endfor %}
+            </template>
+            <tr x-show="admins.length === 0">
+              <td colspan="4" class="px-6 py-4 text-center text-text-light">
+                Aucun admin trouvé. Créez votre premier admin !
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="bg-white rounded-lg shadow-sm border border-border p-6">
-      <h2 class="text-2xl font-semibold text-text mb-4">Créer un Admin</h2>
-      <form method="POST" action="/superadmin/create" class="space-y-4">
+
+    <!-- Create/Edit Admin Form -->
+    <div x-show="showCreateForm || editingAdmin" 
+         x-transition 
+         class="bg-white rounded-lg shadow-sm border border-border p-6">
+      <h2 class="text-2xl font-semibold text-text mb-4" x-text="editingAdmin ? 'Modifier Admin' : 'Créer un Admin'"></h2>
+      
+      <form @submit.prevent="editingAdmin ? updateAdmin() : createAdmin()" class="space-y-4">
         <div>
-          <label for="username" class="block text-sm font-medium text-text-light">Identifiant :</label>
-          <input type="text" id="username" name="username" required class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+          <label for="admin-username" class="block text-sm font-medium text-text-light">Identifiant</label>
+          <input type="text" id="admin-username" x-model="currentAdmin.username" required 
+                 class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
         </div>
+
         <div>
-          <label for="password" class="block text-sm font-medium text-text-light">Mot de passe :</label>
-          <input type="password" id="password" name="password" required class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+          <label for="admin-password" class="block text-sm font-medium text-text-light">Mot de passe</label>
+          <input type="password" id="admin-password" x-model="currentAdmin.password" 
+                 :required="!editingAdmin" 
+                 class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+          <p class="text-xs text-text-light mt-1">
+            <template x-if="editingAdmin">
+              Laissez vide pour conserver le mot de passe actuel
+            </template>
+          </p>
         </div>
+
         <div>
-          <label for="name" class="block text-sm font-medium text-text-light">Nom :</label>
-          <input type="text" id="name" name="name" required class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+          <label for="admin-name" class="block text-sm font-medium text-text-light">Nom</label>
+          <input type="text" id="admin-name" x-model="currentAdmin.name" required
+                 class="w-full px-3 py-2 mt-1 border border-border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
         </div>
-        <button type="submit" id="create" class="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Créer</button>
+
+        <div class="flex justify-end space-x-3">
+          <button type="button" @click="cancelForm()" 
+                  class="px-4 py-2 bg-gray-200 text-text rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+            Annuler
+          </button>
+          <button type="submit" 
+                  class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <template x-if="editingAdmin">
+              Mettre à jour
+            </template>
+            <template x-if="!editingAdmin">
+              Créer
+            </template>
+          </button>
+        </div>
       </form>
     </div>
   </div>
+
+  <script>
+  function superadminApp() {
+    return {
+      // State
+      loading: false,
+      error: null,
+      success: null,
+      admins: [],
+      showCreateForm: false,
+      editingAdmin: false,
+      currentAdmin: {
+        id: null,
+        username: '',
+        password: '',
+        name: ''
+      },
+
+      // Authentication check
+      checkAuth() {
+        // Simple check - in production, use proper session validation
+        if (!document.cookie.includes('session')) {
+          window.location.href = '/superadmin/entrance';
+          return;
+        }
+      },
+
+      // Load admins from API
+      async loadAdmins() {
+        this.loading = true;
+        this.error = null;
+        
+        try {
+          const response = await fetch('/api/admins');
+          const data = await response.json();
+          
+          if (data.success) {
+            this.admins = data.admins;
+          } else {
+            this.error = data.message || 'Erreur lors du chargement des admins';
+          }
+        } catch (error) {
+          this.error = 'Erreur de connexion: ' + error.message;
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      // Prepare edit form
+      prepareEdit(admin) {
+        this.currentAdmin = {
+          id: admin.id,
+          username: admin.username,
+          password: '',
+          name: admin.name
+        };
+        this.editingAdmin = true;
+        this.showCreateForm = false;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      },
+
+      // Create new admin
+      async createAdmin() {
+        if (!this.currentAdmin.username || !this.currentAdmin.password || !this.currentAdmin.name) {
+          this.error = 'Tous les champs sont requis';
+          return;
+        }
+
+        this.loading = true;
+        this.error = null;
+        this.success = null;
+
+        try {
+          const response = await fetch('/api/admins', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: this.currentAdmin.username,
+              password: this.currentAdmin.password,
+              name: this.currentAdmin.name
+            })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            this.success = data.message;
+            this.resetForm();
+            await this.loadAdmins();
+          } else {
+            this.error = data.message || 'Erreur lors de la création';
+          }
+        } catch (error) {
+          this.error = 'Erreur de connexion: ' + error.message;
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      // Update admin
+      async updateAdmin() {
+        if (!this.currentAdmin.username || !this.currentAdmin.name) {
+          this.error = 'Les champs Identifiant et Nom sont requis';
+          return;
+        }
+
+        this.loading = true;
+        this.error = null;
+        this.success = null;
+
+        try {
+          const response = await fetch(`/api/admins/${this.currentAdmin.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: this.currentAdmin.username,
+              password: this.currentAdmin.password || undefined,
+              name: this.currentAdmin.name
+            })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            this.success = data.message;
+            this.resetForm();
+            await this.loadAdmins();
+          } else {
+            this.error = data.message || 'Erreur lors de la mise à jour';
+          }
+        } catch (error) {
+          this.error = 'Erreur de connexion: ' + error.message;
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      // Delete admin
+      async deleteAdmin(adminId) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer cet admin ? Cette action est irréversible.')) {
+          return;
+        }
+
+        this.loading = true;
+        this.error = null;
+        this.success = null;
+
+        try {
+          const response = await fetch(`/api/admins/${adminId}`, {
+            method: 'DELETE'
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            this.success = data.message;
+            await this.loadAdmins();
+          } else {
+            this.error = data.message || 'Erreur lors de la suppression';
+          }
+        } catch (error) {
+          this.error = 'Erreur de connexion: ' + error.message;
+        } finally {
+          this.loading = false;
+        }
+      },
+
+      // Reset form
+      resetForm() {
+        this.currentAdmin = {
+          id: null,
+          username: '',
+          password: '',
+          name: ''
+        };
+        this.editingAdmin = false;
+        this.showCreateForm = false;
+      },
+
+      // Cancel form
+      cancelForm() {
+        this.resetForm();
+      }
+    };
+  }
+  </script>
 {% endblock %}
