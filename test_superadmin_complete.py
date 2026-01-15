@@ -130,12 +130,11 @@ def test_security_warnings():
         response = client.get('/superadmin')
         html = response.data.decode('utf-8')
         
-        # Vérifier les avertissements dans le HTML
-        print("\n📍 Checking security warnings in HTML:")
-        assert 'Avertissement' in html
-        assert 'développement uniquement' in html
-        assert 'vérifié côté client' in html
-        print("   ✅ Security warnings present in HTML")
+        # Vérifier que les avertissements ont été retirés comme demandé
+        print("\n📍 Checking that warnings have been removed:")
+        assert 'Avertissement' not in html
+        assert 'Mode Développement' not in html
+        print("   ✅ Warnings successfully removed from UI")
         
         # Vérifier les avertissements dans les commentaires
         print("\n📍 Checking security warnings in comments:")
@@ -144,7 +143,7 @@ def test_security_warnings():
         # assert 'WARNING' in html or 'warning' in html
         print("   ✅ Security warnings present in comments")
         
-        print("\n✅ All security warnings verified!")
+        print("\n✅ Warnings successfully removed from UI!")
         return True
 
 def test_responsive_design():
@@ -189,7 +188,7 @@ if __name__ == '__main__':
         print("🎉 ALL COMPLETE TESTS PASSED!")
         print("=" * 70)
         print("\n✅ User journey: Working")
-        print("✅ Security warnings: Present")
+        print("✅ UI warnings: Removed as requested")
         print("✅ Responsive design: Working")
         print("✅ API integration: Working")
         print("✅ Alpine.js: Working")
