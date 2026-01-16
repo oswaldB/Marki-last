@@ -8,16 +8,13 @@ Version: 1.0
 
 import os
 import sys
-from app import create_app
+from app import app
 
 def main():
     print("=" * 50)
     print("Lancement du serveur Flask (Mode DEBUG)")
     print("=" * 50)
     print()
-    
-    # Créer l'application Flask
-    app = create_app()
     
     # Configuration du serveur
     host = os.environ.get('FLASK_HOST', '0.0.0.0')

@@ -28,7 +28,7 @@ Créer une page de connexion pour permettre aux utilisateurs de s'authentifier e
 - **Drawer d'Inscription** : Utilisation de Alpine.js pour afficher un drawer informatif pour l'inscription.
 - **Lien Mot de Passe Oublié** : Lien vers une page de récupération de mot de passe.
 - **API de Connexion** : Utilisation d'une route `/api/login` pour gérer la connexion via une requête POST.
-- **Base de Données** : Utilisation de PickleDB pour stocker les informations des utilisateurs.
+- **Base de Données** : Utilisation de SQLite pour stocker les informations des utilisateurs, les sessions, et les logs.
 - **Structure des Utilisateurs** : Chaque utilisateur doit avoir un identifiant unique, un mot de passe haché, et un champ `isAdmin` pour déterminer les permissions.
 
 ## 🎨 Maquette ASCII
@@ -62,31 +62,27 @@ Créer une page de connexion pour permettre aux utilisateurs de s'authentifier e
 7. Afficher un drawer informatif pour l'inscription lorsque l'utilisateur clique sur le lien "S'inscrire".
 8. Afficher un drawer informatif pour le mot de passe oublié lorsque l'utilisateur clique sur le lien "Mot de passe oublié ?".
 
-## 📊 Structure de la Base de Données PickleDB
+## 📊 Structure de la Base de Données SQLite
 
 ### Utilisateurs
-```json
-{
-  "user_counter": 1,
-  "user:1": {
-    "id": "user1",
-    "password": "hashed_password",
-    "isAdmin": false
-  },
-  "user:2": {
-    "id": "admin1",
-    "password": "hashed_password",
-    "isAdmin": true
-  }
-}
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    isAdmin BOOLEAN DEFAULT FALSE,
+    isActive BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
 ### Explications
-- **user_counter** : Compteur auto-incrémenté pour générer des identifiants uniques.
-- **user:<id>** : Chaque utilisateur est stocké avec un identifiant unique.
-- **id** : Identifiant unique de l'utilisateur.
+- **id** : Identifiant unique de l'utilisateur, auto-incrémenté.
+- **username** : Nom d'utilisateur unique, utilisé pour la connexion.
 - **password** : Mot de passe haché de l'utilisateur.
 - **isAdmin** : Booléen indiquant si l'utilisateur est un administrateur.
+- **isActive** : Booléen indiquant si l'utilisateur est actif.
+- **created_at** : Date et heure de création de l'utilisateur.
 
 ## 🔧 API de Connexion
 

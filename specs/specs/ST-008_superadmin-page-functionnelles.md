@@ -17,7 +17,7 @@ Créer une page SuperAdmin pour permettre aux administrateurs principaux de gér
 ## 📝 Exigences Techniques
 - **Protection Frontale** : Utilisation de Alpine.js pour gérer la visibilité des composants en fonction du mot de passe saisi.
 - **API de Gestion des Utilisateurs** : Utilisation d'API pour gérer les utilisateurs (création, activation, modification du mot de passe).
-- **Base de Données** : Utilisation de PickleDB pour stocker les informations des utilisateurs.
+- **Base de Données** : Utilisation de SQLite pour stocker les informations des utilisateurs.
 - **Réactivité** : Utilisation de Alpine.js pour les interactions utilisateur et les appels API.
 
 ## 🎨 Maquette ASCII
