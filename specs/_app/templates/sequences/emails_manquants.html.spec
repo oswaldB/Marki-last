@@ -1,8 +1,8 @@
-# Template: login.html
-**Fichier miroir** : `app/templates/login.html`
+# Template: emails_manquants.html
+**Fichier miroir** : `app/templates/sequences/emails_manquants.html`
 
 ## 📝 Description
-Template pour la page de connexion de l'application Marki. Il inclut un formulaire de connexion, un drawer d'inscription et un drawer de mot de passe oublié.
+Template pour la page de consultation des emails manquants. Il permet de lister les impayés avec des emails manquants et de rediriger vers Marki Mirroir pour la mise à jour manuelle.
 
 ## 📋 Blocs
 - `title` : Titre de la page
@@ -11,15 +11,14 @@ Template pour la page de connexion de l'application Marki. Il inclut un formulai
 ## 🎨 Couleurs Utilisées
 - `text-text` : Texte principal
 - `text-text-light` : Texte secondaire
-- `text-error` : Messages d'erreur
-- `bg-white` : Arrière-plan du formulaire
-- `primary` : Bouton de connexion et liens
+- `bg-white` : Arrière-plan de la liste
+- `primary` : Bouton de redirection vers Marki Mirroir
 - `error` : Messages d'erreur
 - `bg-error` : Arrière-plan des messages d'erreur
 - `border-error` : Bordures des messages d'erreur
-- `border-border` : Bordures des champs de formulaire
+- `border-border` : Bordures des éléments de la liste
 
 ## 📝 Notes
 - Le template utilise les couleurs personnalisées définies dans `base.html`.
 - Les boutons changent de couleur au survol pour une meilleure expérience utilisateur.
-- Les champs de formulaire ont des effets de focus pour une meilleure accessibilité.
+- La page est accessible et facile à utiliser.

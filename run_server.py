@@ -8,7 +8,7 @@ Version: 1.0
 
 import os
 import sys
-from app import app
+from app import create_app
 
 def main():
     print("=" * 50)
@@ -32,7 +32,7 @@ def main():
     print()
     
     # Lancer le serveur
-    app.run(host=host, port=port, debug=debug)
+    create_app().run(host=host, port=port, debug=debug)
 
 if __name__ == '__main__':
     try:

@@ -1,8 +1,8 @@
-# Template: login.html
-**Fichier miroir** : `app/templates/login.html`
+# Template: sequence_emails.html
+**Fichier miroir** : `app/templates/sequences/sequence_emails.html`
 
 ## 📝 Description
-Template pour la page de connexion de l'application Marki. Il inclut un formulaire de connexion, un drawer d'inscription et un drawer de mot de passe oublié.
+Template pour la page de gestion des séquences d'emails. Il permet de créer, modifier, activer et désactiver des séquences d'emails, ainsi que d'associer des listes à des séquences.
 
 ## 📋 Blocs
 - `title` : Titre de la page
@@ -11,10 +11,10 @@ Template pour la page de connexion de l'application Marki. Il inclut un formulai
 ## 🎨 Couleurs Utilisées
 - `text-text` : Texte principal
 - `text-text-light` : Texte secondaire
-- `text-error` : Messages d'erreur
 - `bg-white` : Arrière-plan du formulaire
-- `primary` : Bouton de connexion et liens
-- `error` : Messages d'erreur
+- `primary` : Bouton de création et d'activation
+- `error` : Bouton de désactivation
+- `success` : Bouton de succès
 - `bg-error` : Arrière-plan des messages d'erreur
 - `border-error` : Bordures des messages d'erreur
 - `border-border` : Bordures des champs de formulaire

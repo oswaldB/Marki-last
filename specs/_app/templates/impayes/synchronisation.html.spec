@@ -1,8 +1,8 @@
-# Template: login.html
-**Fichier miroir** : `app/templates/login.html`
+# Template: synchronisation.html
+**Fichier miroir** : `app/templates/impayes/synchronisation.html`
 
 ## 📝 Description
-Template pour la page de connexion de l'application Marki. Il inclut un formulaire de connexion, un drawer d'inscription et un drawer de mot de passe oublié.
+Template pour la page de synchronisation des impayés depuis Marki Mirroir. Il permet de lancer la synchronisation et d'afficher les impayés avec des emails manquants.
 
 ## 📋 Blocs
 - `title` : Titre de la page
@@ -11,9 +11,8 @@ Template pour la page de connexion de l'application Marki. Il inclut un formulai
 ## 🎨 Couleurs Utilisées
 - `text-text` : Texte principal
 - `text-text-light` : Texte secondaire
-- `text-error` : Messages d'erreur
 - `bg-white` : Arrière-plan du formulaire
-- `primary` : Bouton de connexion et liens
+- `primary` : Bouton de synchronisation
 - `error` : Messages d'erreur
 - `bg-error` : Arrière-plan des messages d'erreur
 - `border-error` : Bordures des messages d'erreur

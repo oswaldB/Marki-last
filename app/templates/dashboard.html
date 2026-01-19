@@ -5,15 +5,15 @@
 {% block content %}
 <div class="flex h-screen">
     <!-- Sidebar -->
-    <div class="w-64 bg-gray-800 text-white">
+    <div class="w-64 bg-primary text-white">
         <div class="p-4">
             <h1 class="text-xl font-bold">Marki Dashboard</h1>
         </div>
         <nav class="p-4">
             <ul>
-                <li class="mb-2"><a href="/dashboard" class="text-gray-300 hover:text-white">Accueil</a></li>
-                <li class="mb-2"><a href="/dashboard/profile" class="text-gray-300 hover:text-white">Profil</a></li>
-                <li class="mb-2"><a href="/logout" class="text-gray-300 hover:text-white">Déconnexion</a></li>
+                <li class="mb-2"><a href="/dashboard" class="text-text-light hover:text-white transition-colors">Accueil</a></li>
+                <li class="mb-2"><a href="/dashboard/profile" class="text-text-light hover:text-white transition-colors">Profil</a></li>
+                <li class="mb-2"><a href="/logout" class="text-text-light hover:text-white transition-colors">Déconnexion</a></li>
             </ul>
         </nav>
     </div>
@@ -23,10 +23,10 @@
         <!-- Topbar -->
         <div class="bg-white shadow p-4">
             <div class="flex justify-between items-center">
-                <h2 class="text-lg font-semibold">Tableau de bord</h2>
+                <h2 class="text-lg font-semibold text-text">Tableau de bord</h2>
                 <div>
-                    <span class="mr-4">Utilisateur: {{ user.name }}</span>
-                    <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded">Déconnexion</a>
+                    <span class="mr-4 text-text-light">Utilisateur: {{ user.name }}</span>
+                    <a href="/logout" class="bg-error hover:bg-opacity-90 text-white px-4 py-2 rounded transition-colors">Déconnexion</a>
                 </div>
             </div>
         </div>

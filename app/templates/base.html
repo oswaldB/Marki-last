@@ -7,6 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="https://unpkg.com/lucide@latest/dist/lucide.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#509EE3',
+                            dark: '#236CB9'
+                        },
+                        secondary: '#6D5DCF',
+                        success: '#4CAF50',
+                        error: '#F44336',
+                        text: {
+                            DEFAULT: '#333333',
+                            light: '#666666'
+                        },
+                        border: '#CCCCCC',
+                        'bg-light': '#F5F7FA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 <body>
     {% block content %}{% endblock %}

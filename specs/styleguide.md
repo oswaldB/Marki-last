@@ -12,17 +12,17 @@ Voici un document structuré avec **le style guide complet**, **la configuration
 
 ### **Couleurs**
 
-| Nom | Code Hex | Usage | Classe Tailwind |
-| --- | --- | --- | --- |
-| **Primary** | `#509EE3` | Boutons, liens, accents | `bg-primary`, `text-primary` |
-| **Primary Dark** | `#236CB9` | Hover des boutons, en-têtes | `bg-primary-dark` |
-| **Secondary** | `#6D5DCF` | Accents secondaires | `bg-secondary`, `text-secondary` |
-| **Success** | `#4CAF50` | Messages de succès | `bg-success`, `text-success` |
-| **Error** | `#F44336` | Erreurs, alertes | `bg-error`, `text-error` |
-| **Text** | `#333333` | Texte principal | `text-text` |
-| **Text Light** | `#666666` | Texte secondaire | `text-text-light` |
-| **Border** | `#CCCCCC` | Bordures, séparateurs | `border-border` |
-| **Background Light** | `#F5F7FA` | Arrière-plans clairs | `bg-bg-light` |
+Nom,Couleur,Usage,Classes CSS
+Primary,#007ACE,Boutons, liens, accents,bg-primary, text-primary
+Primary Dark,#005FA3,Hover des boutons, en-têtes,bg-primary-dark
+Secondary,#4A90E2,Accents secondaires,bg-secondary, text-secondary
+Success,#2ECC71,Messages de succès,bg-success, text-success
+Error,#E74C3C,Erreurs, alertes,bg-error, text-error
+Warning,#F39C12,Alertes modérées,bg-warning, text-warning
+Text,#2C3E50,Texte principal,text-text
+Text Light,#7F8C8D,Texte secondaire,text-text-light
+Border,#BDC3C7,Bordures, séparateurs,border-border
+Background Light,#ECF0F1,Arrière-plans clairs,bg-light
 
 ---
 

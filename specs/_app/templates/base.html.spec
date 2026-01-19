@@ -1,75 +1,28 @@
 # Template: base.html
 **Fichier miroir** : `app/templates/base.html`
-**Description** : Template de base pour toutes les pages de l'application.
 
----
+## 📝 Description
+Template de base pour toutes les pages de l'application Marki. Il inclut la configuration de Tailwind CSS, Alpine.js, et les couleurs personnalisées.
 
-## 🔧 Structure HTML
+## 🎨 Couleurs Personnalisées
+Les couleurs suivantes sont définies dans le template :
 
-### Balises de Base
-```html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Marki App{% endblock %}</title>
-</head>
-<body>
-    {% block content %}{% endblock %}
-</body>
-</html>
-```
+| Nom | Couleur | Usage |
+| --- | --- | --- |
+| Primary | #509EE3 | Boutons, liens, accents |
+| Primary Dark | #236CB9 | Hover des boutons, en-têtes |
+| Secondary | #6D5DCF | Accents secondaires |
+| Success | #4CAF50 | Messages de succès |
+| Error | #F44336 | Erreurs, alertes |
+| Text | #333333 | Texte principal |
+| Text Light | #666666 | Texte secondaire |
+| Border | #CCCCCC | Bordures, séparateurs |
+| Background Light | #F5F7FA | Arrière-plans clairs |
 
-### CDN Tailwind CSS
-**Description** : Intégration de Tailwind CSS via CDN pour une utilisation rapide et sans configuration.
-**Code** :
-```html
-<script src="https://cdn.tailwindcss.com"></script>
-```
+## 📋 Blocs
+- `title` : Titre de la page
+- `content` : Contenu principal de la page
 
-### CDN Alpine.js
-**Description** : Intégration de Alpine.js via CDN pour une gestion réactive des composants.
-**Code** :
-```html
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-```
-
-### CDN Lucid Icons
-**Description** : Intégration de Lucid Icons via CDN pour une utilisation facile des icônes.
-**Code** :
-```html
-<link href="https://unpkg.com/lucide@latest/dist/lucide.css" rel="stylesheet">
-```
-
-## 📝 Variables Globales
-Aucune variable globale spécifique pour ce template.
-
-## 📋 Flux Principal
-1. Charger les dépendances CSS et JS via CDN.
-2. Afficher le contenu dynamique via le bloc `content`.
-3. Permettre la personnalisation du titre via le bloc `title`.
-
-## 🎨 Maquette ASCII
-```
-+-------------------------------------+
-|  🏗 [MARKI] BASE LAYOUT             |
-|                                     |
-|  <!DOCTYPE html>                    |
-|  <html lang="fr">                  |
-|  <head>                             |
-|  <meta charset="UTF-8">            |
-|  <meta name="viewport" ...>        |
-|  <title>{% block title %}</title>   |
-|  <script src="CDN Tailwind">      |
-|  <script src="CDN Alpine.js">     |
-|  <link href="CDN Lucid Icons">    |
-|  </head>                            |
-|  <body>                             |
-|  {% block content %}{% endblock %}  |
-|  </body>                            |
-|  </html>                            |
-|                                     |
-|  🎨 Powered by MARKI                 |
-+-------------------------------------+
-```
+## 📝 Notes
+- La police Inter est utilisée pour tout le texte.
+- Les couleurs personnalisées sont définies dans la configuration Tailwind.

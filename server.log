@@ -1,114 +1,45 @@
+==================================================
+Lancement du serveur Flask (Mode DEBUG)
+==================================================
+
+Configuration:
+  Hôte: 0.0.0.0
+  Port: 5000
+  Mode Debug: ACTIF
+
+URL: http://0.0.0.0:5000
+Appuyez sur Ctrl+C pour arrêter le serveur.
+==================================================
+
  * Serving Flask app 'app'
  * Debug mode: on
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.239:5000
 Press CTRL+C to quit
  * Restarting with stat
  * Debugger is active!
- * Debugger PIN: 872-027-686
-127.0.0.1 - - [15/Jan/2026 23:45:59] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:11] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:11] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:13] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:13] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:14] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:14] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:16] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:16] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:17] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:17] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:20] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:20] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:54] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:46:54] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:05] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:05] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:07] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:07] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:08] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:08] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:10] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:10] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:11] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:11] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:14] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:14] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:48] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:48:48] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
- * Detected change in '/home/oswald/Desktop/Marki-last/test_superadmin_with_logs.py', reloading
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 872-027-686
-127.0.0.1 - - [15/Jan/2026 23:49:24] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:29] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:29] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:30] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:31] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:32] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:32] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:33] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:33] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:34] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:34] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:37] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:51:37] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:52:10] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:52:10] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:53:21] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:53:21] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:18] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:18] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:20] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:20] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:21] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:21] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:23] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:23] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:24] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:24] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:27] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:54:27] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:55:01] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:55:01] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:50] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:50] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:53] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:53] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:53] "GET /favicon.ico HTTP/1.1" 404 -
-127.0.0.1 - - [15/Jan/2026 23:58:54] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:54] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:56] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:56] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:58] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:58:58] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:01] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:01] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:02] "GET /favicon.ico HTTP/1.1" 404 -
-127.0.0.1 - - [15/Jan/2026 23:59:22] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:23] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:24] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:24] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:26] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:26] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:27] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:27] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:28] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:28] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:31] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [15/Jan/2026 23:59:31] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:40] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:40] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:43] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:43] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:44] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:44] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:45] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:45] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:47] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:47] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:50] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:03:50] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:04:18] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:04:18] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:04:20] "GET /superadmin HTTP/1.1" 200 -
-127.0.0.1 - - [16/Jan/2026 00:04:20] "GET /static/images/marki-logo.png HTTP/1.1" 200 -
+ * Debugger PIN: 121-194-607
+127.0.0.1 - - [18/Jan/2026 21:32:11] "GET / HTTP/1.1" 200 -
+162.142.125.192 - - [18/Jan/2026 21:44:26] code 400, message Bad request version ('À\x14À')
+162.142.125.192 - - [18/Jan/2026 21:44:26] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03Äø\x7fûfþ\x97ã,\x979ú$ó¨\\\x10Î\x06û\x08\x9c.U\x8bHí(\x91õUø Û\x92ùÜhñïÝW\x94\x09Àßu\x02·:\x81÷Ch\x8a\x88[:º!\x88=\x8c#\x81\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" 400 -
+162.142.125.192 - - [18/Jan/2026 21:44:30] "GET / HTTP/1.1" 200 -
+162.142.125.192 - - [18/Jan/2026 21:44:36] code 400, message Bad request version ('À\x14À')
+162.142.125.192 - - [18/Jan/2026 21:44:36] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03|\x1eáøYP,S}L!Ö\x95\x88|kJ\x96r\x93>åô\x12Ã7ß8.\x90Ê\x85 Pcý \x9dDî@è¡dãzÝf\x8c±f4ø\x01\x9b÷¢Lï)¦MöÐ\x98\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" 400 -
+162.142.125.192 - - [18/Jan/2026 21:44:37] "GET / HTTP/1.1" 200 -
+162.142.125.192 - - [18/Jan/2026 21:44:37] code 505, message Invalid HTTP version (2.0)
+162.142.125.192 - - [18/Jan/2026 21:44:37] "PRI * HTTP/2.0" 505 -
+162.142.125.192 - - [18/Jan/2026 21:44:37] "GET /favicon.ico HTTP/1.1" 404 -
+162.142.125.192 - - [18/Jan/2026 21:44:41] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03:\x93Ü\x90(Æ¯\x16\x03Æà*\x07¨LbU\x8f\x01~\x98D\x8dîËæ«$\x803á\x1a')
+162.142.125.192 - - [18/Jan/2026 21:44:41] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03:\x93Ü\x90(Æ¯\x16\x03Æà*\x07¨LbU\x8f\x01~\x98D\x8dîËæ«$\x803á\x1a ;±\x8bM­æd`D\x9beWhÁz\x14\x9bp\x1b" 400 -
+162.142.125.192 - - [18/Jan/2026 21:44:41] "GET /login HTTP/1.1" 200 -
+162.142.125.192 - - [18/Jan/2026 21:44:42] "GET /favicon.ico HTTP/1.1" 404 -
+101.249.60.222 - - [19/Jan/2026 02:33:13] "GET / HTTP/1.1" 200 -
+60.16.207.34 - - [19/Jan/2026 02:33:37] "GET / HTTP/1.1" 200 -
+60.13.7.98 - - [19/Jan/2026 02:33:41] "GET /favicon.ico HTTP/1.1" 404 -
+198.235.24.82 - - [19/Jan/2026 04:10:40] "GET / HTTP/1.0" 200 -
+193.142.147.209 - - [19/Jan/2026 05:01:39] "POST / HTTP/1.1" 405 -
+205.210.31.231 - - [19/Jan/2026 06:30:25] "GET / HTTP/1.1" 200 -
+193.142.147.209 - - [19/Jan/2026 08:34:46] "POST / HTTP/1.1" 405 -
+184.105.139.70 - - [19/Jan/2026 10:08:13] "GET / HTTP/1.1" 200 -
