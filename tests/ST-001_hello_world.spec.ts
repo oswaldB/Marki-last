@@ -29,7 +29,7 @@ test.describe('Hello World Page', () => {
     });
     console.log('Console logs avant action:', beforeLogs);
     
-    await page.goto('http://127.0.0.1:5000/');
+    await page.goto('http://127.0.0.1:5000/hello');
     
     // Capture des logs de la console après l'action
     const afterLogs = await page.evaluate(() => {
@@ -55,12 +55,17 @@ test.describe('Hello World Page', () => {
     await expect(helloWorldText).toHaveCSS('font-weight', '700');
   });
 
-  test('Doit être accessible via l\'URL /', async ({ page }) => {
-    await expect(page).toHaveURL('http://127.0.0.1:5000/');
+  test('Doit être accessible via l\'URL /hello', async ({ page }) => {
+    await expect(page).toHaveURL('http://127.0.0.1:5000/hello');
   });
 
   test('Doit vérifier les logs du serveur', async ({ page }) => {
     // Vérification que la page est accessible
-    await expect(page).toHaveURL('http://127.0.0.1:5000/');
+    await expect(page).toHaveURL('http://127.0.0.1:5000/hello');
+  });
+  
+  test('Doit retourner un statut HTTP 200', async ({ page }) => {
+    const response = await page.goto('http://127.0.0.1:5000/hello');
+    await expect(response?.status()).toBe(200);
   });
 });

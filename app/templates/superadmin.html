@@ -26,13 +26,13 @@
                     <h1 class="text-2xl font-bold text-text">SuperAdmin</h1>
                 </div>
                 
-                <div x-data="superAdminPage()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div x-data="superAdminPage" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div class="mb-4">
                         <label class="block text-text text-sm font-bold mb-2" for="protection-code">
                             Code de Protection
                         </label>
                         <input x-model="protectionCode" class="shadow appearance-none border border-border rounded w-full py-2 px-3 text-text leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" id="protection-code" type="text" placeholder="Entrez le code de protection">
-                        <button @click="validateProtectionCode" class="mt-2 bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors" type="button">
+                        <button @click="validateProtectionCode()" class="mt-2 bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors" type="button">
                             Valider
                         </button>
                     </div>
@@ -64,7 +64,7 @@
                             </label>
                         </div>
                         
-                        <button @click="createUser" class="bg-success hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-success focus:ring-opacity-50 transition-colors" type="button">
+                        <button @click="createUser()" class="bg-success hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-success focus:ring-opacity-50 transition-colors" type="button">
                             Créer
                         </button>
                         
@@ -102,99 +102,97 @@
 </div>
 
 <script>
-function superAdminPage() {
-    return {
-        protectionCode: '',
-        isProtectedContentVisible: false,
-        newUser: {
-            id: '',
-            password: '',
-            isAdmin: false
-        },
-        users: [],
-        
-        validateProtectionCode() {
-            if (this.protectionCode === 'Citron6-Mustang9') {
-                this.isProtectedContentVisible = true;
+const superAdminPage = {
+    protectionCode: '',
+    isProtectedContentVisible: false,
+    newUser: {
+        id: '',
+        password: '',
+        isAdmin: false
+    },
+    users: [],
+    
+    validateProtectionCode() {
+        if (this.protectionCode === 'Citron6-Mustang9') {
+            this.isProtectedContentVisible = true;
+            this.loadUsers();
+        } else {
+            alert('Mot de passe de protection incorrect.');
+        }
+    },
+    
+    async loadUsers() {
+        try {
+            const response = await fetch('/api/users');
+            const data = await response.json();
+            this.users = data.users;
+        } catch (error) {
+            console.error('Erreur lors du chargement des utilisateurs:', error);
+        }
+    },
+    
+    async createUser() {
+        try {
+            const response = await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.newUser)
+            });
+            const data = await response.json();
+            if (data.status === 'success') {
+                alert('Utilisateur créé avec succès.');
+                this.newUser = { id: '', password: '', isAdmin: false };
                 this.loadUsers();
             } else {
-                alert('Mot de passe de protection incorrect.');
+                alert('Erreur lors de la création de l\'utilisateur.');
             }
-        },
-        
-        async loadUsers() {
-            try {
-                const response = await fetch('/api/users');
-                const data = await response.json();
-                this.users = data.users;
-            } catch (error) {
-                console.error('Erreur lors du chargement des utilisateurs:', error);
+        } catch (error) {
+            console.error('Erreur lors de la création de l\'utilisateur:', error);
+        }
+    },
+    
+    async activateUser(userId) {
+        try {
+            const response = await fetch(`/api/users/${userId}/activate`, {
+                method: 'POST'
+            });
+            const data = await response.json();
+            if (data.status === 'success') {
+                alert('Utilisateur activé avec succès.');
+                this.loadUsers();
+            } else {
+                alert('Erreur lors de l\'activation de l\'utilisateur.');
             }
-        },
-        
-        async createUser() {
-            try {
-                const response = await fetch('/api/users', {
+        } catch (error) {
+            console.error('Erreur lors de l\'activation de l\'utilisateur:', error);
+        }
+    },
+    
+    async modifyUser(userId) {
+        try {
+            const newPassword = prompt('Entrez le nouveau mot de passe:');
+            if (newPassword) {
+                const response = await fetch(`/api/users/${userId}/modify`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(this.newUser)
+                    body: JSON.stringify({ password: newPassword })
                 });
                 const data = await response.json();
                 if (data.status === 'success') {
-                    alert('Utilisateur créé avec succès.');
-                    this.newUser = { id: '', password: '', isAdmin: false };
+                    alert('Mot de passe modifié avec succès.');
                     this.loadUsers();
                 } else {
-                    alert('Erreur lors de la création de l\'utilisateur.');
+                    alert('Erreur lors de la modification du mot de passe.');
                 }
-            } catch (error) {
-                console.error('Erreur lors de la création de l\'utilisateur:', error);
             }
-        },
-        
-        async activateUser(userId) {
-            try {
-                const response = await fetch(`/api/users/${userId}/activate`, {
-                    method: 'POST'
-                });
-                const data = await response.json();
-                if (data.status === 'success') {
-                    alert('Utilisateur activé avec succès.');
-                    this.loadUsers();
-                } else {
-                    alert('Erreur lors de l\'activation de l\'utilisateur.');
-                }
-            } catch (error) {
-                console.error('Erreur lors de l\'activation de l\'utilisateur:', error);
-            }
-        },
-        
-        async modifyUser(userId) {
-            try {
-                const newPassword = prompt('Entrez le nouveau mot de passe:');
-                if (newPassword) {
-                    const response = await fetch(`/api/users/${userId}/modify`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ password: newPassword })
-                    });
-                    const data = await response.json();
-                    if (data.status === 'success') {
-                        alert('Mot de passe modifié avec succès.');
-                        this.loadUsers();
-                    } else {
-                        alert('Erreur lors de la modification du mot de passe.');
-                    }
-                }
-            } catch (error) {
-                console.error('Erreur lors de la modification du mot de passe:', error);
-            }
+        } catch (error) {
+            console.error('Erreur lors de la modification du mot de passe:', error);
         }
-    };
-}
+    }
+};
 </script>
 {% endblock %}

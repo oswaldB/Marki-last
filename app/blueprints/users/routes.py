@@ -9,7 +9,7 @@ bp = Blueprint('users', __name__)
 
 # Initialisation de la base de données
 def get_db():
-    db = sqlite3.connect('/app/marki.db')
+    db = sqlite3.connect('marki.db')
     db.row_factory = sqlite3.Row
     return db
 

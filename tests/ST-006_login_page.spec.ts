@@ -34,21 +34,27 @@ test.describe('Login Page', () => {
     const registerButton = page.locator('button:has-text("S\'inscrire")');
     await registerButton.click();
 
-    const drawer = page.locator('.fixed.inset-0');
-    await expect(drawer).toBeDefined();
+    // Attendre que Alpine.js met à jour l'état du drawer
+    await page.waitForTimeout(1000);
+
+    const drawer = page.locator('.fixed.inset-0:has-text("Inscription")');
+    await expect(drawer).toBeVisible();
 
     const drawerTitle = page.locator('h2:has-text("Inscription")');
-    await expect(drawerTitle).toBeDefined();
+    await expect(drawerTitle).toBeVisible();
   });
 
   test('Doit ouvrir le drawer de mot de passe oublié lorsque l\'utilisateur clique sur le lien "Mot de passe oublié ?"', async ({ page }) => {
-    const forgotPasswordLink = page.locator('a:has-text("Mot de passe oublié ?")');
-    await forgotPasswordLink.click();
+    const forgotPasswordButton = page.locator('button:has-text("Mot de passe oublié ?")');
+    await forgotPasswordButton.click();
 
-    const drawer = page.locator('.fixed.inset-0');
-    await expect(drawer).toBeDefined();
+    // Attendre que Alpine.js met à jour l'état du drawer
+    await page.waitForTimeout(1000);
+
+    const drawer = page.locator('.fixed.inset-0:has-text("Mot de Passe Oublié")');
+    await expect(drawer).toBeVisible();
 
     const drawerTitle = page.locator('h2:has-text("Mot de Passe Oublié")');
-    await expect(drawerTitle).toBeDefined();
+    await expect(drawerTitle).toBeVisible();
   });
 });
