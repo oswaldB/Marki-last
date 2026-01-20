@@ -5,7 +5,9 @@ import sqlite3
 
 # Initialisation de la base de données SQLite
 def init_db():
-    db = sqlite3.connect('marki.db')
+    import os
+    db_path = os.path.join(os.path.dirname(__file__), 'marki.db')
+    db = sqlite3.connect(db_path)
     cursor = db.cursor()
     
     # Création des tables si elles n'existent pas
@@ -31,16 +33,7 @@ def init_db():
         )
     ''')
     
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            action TEXT NOT NULL,
-            details TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id)
-        )
-    ''')
+
     
     db.commit()
     db.close()
@@ -52,6 +45,10 @@ def create_app():
     
     # Initialisation de la base de données
     init_db()
+    
+    # Initialisation de la base de données PickleDB pour les logs
+    from app.logs_db import init_logs_db
+    init_logs_db()
     
     # Configuration de Flask-Login
     login_manager = LoginManager()
@@ -67,10 +64,12 @@ def create_app():
     from app.blueprints.hello.routes import bp as hello_bp
     from app.blueprints.auth.routes import bp as auth_bp
     from app.blueprints.users.routes import bp as users_bp
+    from app.blueprints.dashboard.routes import bp as dashboard_bp
     
     # Enregistrement des blueprints
     app.register_blueprint(hello_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(users_bp)
+    app.register_blueprint(dashboard_bp)
     
     return app

@@ -7,6 +7,7 @@ const config = {
   
   // Options pour capturer les logs de la console
   use: {
+    baseURL: 'http://127.0.0.1:5000',
     // Capture des logs de la console
     trace: 'on',
     video: 'on',

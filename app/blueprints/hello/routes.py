@@ -9,4 +9,4 @@ def hello_world():
     Affiche une page simple avec le texte "Hello World".
     Inclut le logo Marki.
     """
-    return render_template('hello_world.html')
+    return render_template('simple.html')

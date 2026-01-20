@@ -8,10 +8,18 @@ import hashlib
 bp = Blueprint('auth', __name__)
 
 # Initialisation de la base de données
+import pickledb
+
 def get_db():
-    db = sqlite3.connect('marki.db')
+    db = sqlite3.connect('/app/marki.db')
     db.row_factory = sqlite3.Row
     return db
+
+from pickledb import PickleDB
+
+def get_logs_db():
+    logs_db = PickleDB('/app/logs.db')
+    return logs_db
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -41,10 +49,21 @@ def login():
                 # Création d'une session
                 session['user_id'] = user_data['id']
                 
-                # Ajout d'un log
-                cursor.execute("INSERT INTO logs (user_id, action, details) VALUES (?, ?, ?)",
-                               (user_data['id'], 'login', 'User logged in successfully'))
-                db.commit()
+                # Ajout d'un log dans PickleDB
+                logs_db = get_logs_db()
+                log_key = f"user_{user_data['id']}"
+                log_entry = {
+                    "action": "login",
+                    "details": "User logged in successfully",
+                    "created_at": datetime.datetime.now().isoformat()
+                }
+                if log_key not in logs_db.getall():
+                    logs_db.set(log_key, [log_entry])
+                else:
+                    logs = logs_db.get(log_key)
+                    logs.append(log_entry)
+                    logs_db.set(log_key, logs)
+                logs_db.dump()
                 
                 db.close()
                 return redirect(redirect_url)
@@ -66,13 +85,21 @@ def logout():
     # Suppression de la session
     session.pop('user_id', None)
     
-    # Ajout d'un log
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute("INSERT INTO logs (user_id, action, details) VALUES (?, ?, ?)",
-                   (current_user.id, 'logout', 'User logged out successfully'))
-    db.commit()
-    db.close()
+    # Ajout d'un log dans PickleDB
+    logs_db = get_logs_db()
+    log_key = f"user_{current_user.id}"
+    log_entry = {
+        "action": "logout",
+        "details": "User logged out successfully",
+        "created_at": datetime.datetime.now().isoformat()
+    }
+    if log_key not in logs_db.getall():
+        logs_db.set(log_key, [log_entry])
+    else:
+        logs = logs_db.get(log_key)
+        logs.append(log_entry)
+        logs_db.set(log_key, logs)
+    logs_db.dump()
     
     return redirect(url_for('auth.login'))
 

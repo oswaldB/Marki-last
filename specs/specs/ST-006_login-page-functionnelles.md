@@ -28,7 +28,7 @@ Créer une page de connexion pour permettre aux utilisateurs de s'authentifier e
 - **Drawer d'Inscription** : Utilisation de Alpine.js pour afficher un drawer informatif pour l'inscription.
 - **Lien Mot de Passe Oublié** : Lien vers une page de récupération de mot de passe.
 - **API de Connexion** : Utilisation d'une route `/api/login` pour gérer la connexion via une requête POST.
-- **Base de Données** : Utilisation de SQLite pour stocker les informations des utilisateurs, les sessions, et les logs.
+- **Base de Données** : Utilisation de SQLite pour stocker les informations des utilisateurs et les sessions. Utilisation de PickleDB pour stocker les logs.
 - **Structure des Utilisateurs** : Chaque utilisateur doit avoir un identifiant unique, un mot de passe haché, et un champ `isAdmin` pour déterminer les permissions.
 
 ## 🎨 Maquette ASCII
@@ -62,9 +62,9 @@ Créer une page de connexion pour permettre aux utilisateurs de s'authentifier e
 7. Afficher un drawer informatif pour l'inscription lorsque l'utilisateur clique sur le lien "S'inscrire".
 8. Afficher un drawer informatif pour le mot de passe oublié lorsque l'utilisateur clique sur le lien "Mot de passe oublié ?".
 
-## 📊 Structure de la Base de Données SQLite
+## 📊 Structure de la Base de Données
 
-### Utilisateurs
+### Utilisateurs (SQLite)
 ```sql
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -83,6 +83,22 @@ CREATE TABLE users (
 - **isAdmin** : Booléen indiquant si l'utilisateur est un administrateur.
 - **isActive** : Booléen indiquant si l'utilisateur est actif.
 - **created_at** : Date et heure de création de l'utilisateur.
+
+### Logs (PickleDB)
+Les logs des utilisateurs seront stockés dans une base de données PickleDB séparée.
+- **Fichier** : `logs.db`
+- **Structure** :
+  ```python
+  {
+      "user_<user_id>": [
+          {
+              "action": str,
+              "details": str,
+              "created_at": str
+          }
+      ]
+  }
+  ```
 
 ## 🔧 API de Connexion
 
@@ -121,6 +137,22 @@ CREATE TABLE users (
 - **login_user** : Fonction pour connecter un utilisateur.
 - **logout_user** : Fonction pour déconnecter un utilisateur.
 - **current_user** : Objet pour accéder à l'utilisateur actuel.
+
+## 📊 Gestion des Logs (PickleDB)
+- **PickleDB** : Utilisé pour stocker les logs des utilisateurs.
+- **Fichier** : `logs.db`
+- **Structure** :
+  ```python
+  {
+      "user_<user_id>": [
+          {
+              "action": str,
+              "details": str,
+              "created_at": str
+          }
+      ]
+  }
+  ```
 
 ## 📄 Drawer d'Inscription
 ```

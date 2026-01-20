@@ -10,7 +10,7 @@
 **Description** :
 - Gère la connexion des utilisateurs via un formulaire de connexion.
 - Utilise Flask-Login pour gérer les sessions utilisateur.
-- Redirige l'utilisateur vers `/app/dashboard` par défaut ou vers la page spécifiée dans le paramètre `?redirect=/path`.
+- Redirige l'utilisateur vers `/dashboard` par défaut ou vers la page spécifiée dans le paramètre `?redirect=/path`.
 
 **Route** :
 - **GET /login** : Affiche le formulaire de connexion.
@@ -21,10 +21,10 @@
 |-----------|--------|--------------------------------------|------------------|
 | id        | str    | Identifiant unique de l'utilisateur  | "user1"         |
 | password  | str    | Mot de passe de l'utilisateur        | "password123"   |
-| redirect  | str    | URL de redirection après connexion   | "/app/dashboard"|
+| redirect  | str    | URL de redirection après connexion   | "/dashboard"|
 
 **Retour** :
-- En cas de succès, redirige vers la page spécifiée ou `/app/dashboard`.
+- En cas de succès, redirige vers la page spécifiée ou `/dashboard`.
 - En cas d'échec, affiche un message d'erreur.
 
 ### `logout()`
@@ -223,7 +223,7 @@ db.close()
 5. Créer une session dans la table `sessions` avec un jeton unique.
 6. Ajouter un log dans la table `logs` pour l'action de connexion.
 7. Utiliser Flask-Login pour gérer la session utilisateur.
-8. En cas de succès, rediriger l'utilisateur vers `/app/dashboard` par défaut ou vers la page spécifiée dans le paramètre `?redirect=/path`.
+8. En cas de succès, rediriger l'utilisateur vers `/dashboard` par défaut ou vers la page spécifiée dans le paramètre `?redirect=/path`.
 9. En cas d'échec, afficher un message d'erreur.
 10. Permettre la déconnexion des utilisateurs via la route `/logout`.
 11. Supprimer la session de la table `sessions` lors de la déconnexion.
