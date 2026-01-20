@@ -206,6 +206,41 @@ Cette section doit inclure des maquettes ASCII ou des descriptions des interface
 <Description des éléments de l'interface utilisateur.>
 ```
 
+#### 6. **Todo - Qui fait quoi ?**
+Cette section doit inclure une liste des tâches à faire, organisées par étape du processus de développement, avec les acteurs responsables.
+
+```markdown
+## 📌 Todo - Qui fait quoi ?
+
+### 01_specs_fonctionnelles
+- [ ] <Description de la tâche> @<Acteur>
+- [ ] <Description de la tâche> @<Acteur>
+
+### 02_specs_techniques
+- [ ] <Description de la tâche> @<Acteur>
+
+### 03_redaction_tests
+- [ ] <Description de la tâche> @<Acteur>
+
+### 04_developpement_bdd
+- [ ] <Description de la tâche> @<Acteur>
+
+### 05_developpement_back
+- [ ] <Description de la tâche> @<Acteur>
+
+### 06_developpement_front
+- [ ] <Description de la tâche> @<Acteur>
+
+### 07_execution_tests
+- [ ] <Description de la tâche> @<Acteur>
+
+### 08_tests_reussis
+- [ ] <Description de la tâche> @<Acteur>
+
+### 09_tests_echoues
+- [ ] <Description de la tâche> @<Acteur>
+```
+
 **Exemple** :
 ```markdown
 ## 🎨 Maquettes UI

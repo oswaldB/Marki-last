@@ -161,3 +161,21 @@ Feature: Synchronisation des impayés entre PostgreSQL et SQLite
 | Codifia        | Route Flask (`/api/sync-impayes`)         | `/app/routes.py`                |
 | RedacTestor    | Tests unitaires (pytest)                  | `/tests/test_sync_impayes.py`   |
 | TravauxFini    | Rapport d'exécution                      | `/reports/sync_impayes_*.log`   |
+
+---
+
+## **8. Todo - Qui fait quoi ?**
+
+### **À faire**
+- [ ] **Specificator** : Valider les spécifications fonctionnelles avec l'équipe.
+- [ ] **Codifia** : Implémenter le script Python `sync_impayes.py` selon les spécifications.
+- [ ] **Codifia** : Créer les composants Alpine.js pour l'interface de synchronisation.
+- [ ] **Codifia** : Ajouter la route Flask `/api/sync-impayes` pour déclencher la synchronisation.
+- [ ] **RedacTestor** : Rédiger les tests unitaires pour le script de synchronisation.
+- [ ] **TravauxFini** : Exécuter le script et générer les rapports de synchronisation.
+
+### **En cours**
+- [ ] Aucune tâche en cours pour le moment.
+
+### **Terminé**
+- [ ] Aucune tâche terminée pour le moment.

@@ -152,7 +152,52 @@ Le processus de développement de Steroids Studio est structuré en plusieurs é
 
 ## 📌 Gestion des Todos
 
-Le Global Manager est responsable de la gestion des todos pour le projet Marki. Les todos doivent être exhaustives et suivre une logique claire pour s'assurer que tous les membres de l'équipe savent ce qu'ils doivent faire.
+Le **Global Manager** est responsable de la gestion des todos pour le projet Marki. Les todos doivent être exhaustives et suivre une logique claire pour s'assurer que tous les membres de l'équipe savent ce qu'ils doivent faire.
+
+### Rôles et Responsabilités
+
+1. **Global Manager**
+   - **Responsabilités** :
+     - Définir les todos pour toutes les spécifications (fonctionnelles, techniques, tests, etc.).
+     - Assigner les todos aux différents acteurs (Product Manager, Senior Software Engineer, DBA, Dev Senior Python, Dev Senior AlpineJS, QA Senior Playwright, etc.).
+     - Mettre à jour les todos dans les fichiers de spécifications.
+     - Superviser la gestion des todos.
+     - Assurer la coordination entre les différents rôles.
+     - Valider les todos avant qu'elles ne soient fusionnées.
+
+2. **Product Manager**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées aux spécifications fonctionnelles.
+     - Signaler l'avancement des todos assignées.
+
+3. **Senior Software Engineer**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées aux spécifications techniques.
+     - Signaler l'avancement des todos assignées.
+
+4. **DBA (Database Administrator)**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées à la gestion des bases de données.
+     - Signaler l'avancement des todos assignées.
+
+5. **Dev Senior Python**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées au développement backend.
+     - Signaler l'avancement des todos assignées.
+
+6. **Dev Senior AlpineJS**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées au développement frontend.
+     - Signaler l'avancement des todos assignées.
+
+7. **QA Senior Playwright**
+   - **Responsabilités** :
+     - Collaborer avec le Global Manager pour définir les todos liées à la rédaction et à l'exécution des tests.
+     - Signaler l'avancement des todos assignées.
+
+### Script de Gestion des Todos
+
+Un script Python a été créé pour faciliter la gestion des todos. Le script est situé à `scripts/manage_todos_and_server.py`.
 
 ### Script de Gestion des Todos
 

@@ -19,7 +19,11 @@ Le **Product Manager** est responsable de la définition des spécifications fon
    - Travailler avec le **Dev Senior AlpineJS** pour définir les besoins en interface utilisateur.
    - Travailler avec le **QA Senior Playwright** pour s'assurer que les spécifications sont testables.
 
-3. **Valider les Spécifications** :
+3. **Gestion des Todos** :
+   - Collaborer avec le **Global Manager** pour définir les todos liées aux spécifications fonctionnelles.
+   - Signaler l'avancement des todos assignées.
+
+4. **Valider les Spécifications** :
    - S'assurer que les spécifications sont validées par l'équipe avant d'être fusionnées.
    - Maintenir une documentation claire et concise pour faciliter la maintenance.
 
